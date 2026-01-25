@@ -1,0 +1,30 @@
+<div class="news">
+  {% if site.posts != blank %}
+    {% assign posts_size = site.posts | size %}
+    <div class="table-responsive">
+      <table class="table table-sm table-borderless">
+        {% assign posts = site.posts %}
+        {% for item in posts limit: site.latest_posts.limit %}
+          <tr>
+            <th scope="row" style="width: 20%">
+              {% if item.inline_date %}
+                {{ item.inline_date }}
+              {% else %}
+                {{ item.date | date: '%b %d, %Y' }}
+              {% endif %}
+            </th>
+            <td>
+              {% if item.inline %}
+                {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+              {% else %}
+                <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>No experience listed yet...</p>
+  {% endif %}
+</div>
