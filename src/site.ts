@@ -7,6 +7,11 @@ export const SITE = {
   title: 'Denny Kim (Jae Hyeon Kim)',
   role: 'Software Engineer (AI Optimized Engineer)',
   company: 'CoAsia',
+  companyUrl: 'https://www.coasia.com',
+  degree: 'M.S. in Artificial Intelligence',
+  school: 'Ajou University',
+  schoolUrl: 'https://www.ajou.ac.kr',
+  degreeNote: 'Expected Feb 2027 · Thesis under review',
   location: 'Hwaseong, South Korea',
   description:
     'Embedded software engineer turned edge AI engineer — board bring-up and device drivers, on-device inference optimization, and on-premises local LLM & RAG research.',
