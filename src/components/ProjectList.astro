@@ -3,7 +3,7 @@ import type { Project } from '../utils';
 const { projects } = Astro.props as { projects: Project[] };
 ---
 {projects.length === 0 ? (
-  <p class="muted">정리 중이에요.</p>
+  <p class="muted">Coming soon.</p>
 ) : (
   <ul class="grid">
     {projects.map((p) => (

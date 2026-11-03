@@ -1,96 +1,97 @@
-// 사이트 전체에서 쓰는 개인 정보. 대부분 여기만 고치면 반영돼요.
+// Personal info used across the site. Most edits only need this file.
 export const SITE = {
   name: 'Jae Hyeon Kim',
   nameKo: '김재현',
-  title: 'Jae Hyeon Kim · 김재현',
+  shortName: 'JH Kim',
+  title: 'Jae Hyeon Kim',
   role: 'Software Engineer (AI Optimized Engineer)',
   company: 'CoAsia',
-  location: 'Hwaseong, Korea',
+  location: 'Hwaseong, South Korea',
   description:
-    'Embedded Linux에서 출발해 Edge AI 추론 최적화, 로컬 LLM·RAG, Kubernetes·Ray 기반 AI 학습 플랫폼까지 다루는 소프트웨어 엔지니어 김재현입니다.',
+    'Software engineer working across embedded Linux, edge AI inference optimization, on-premises local LLM & RAG, and Kubernetes/Ray-based AI training platforms.',
   avatar: '/avatar.jpg',
 };
 
-// 비워두면('') 화면에 표시되지 않아요.
+// Leave a value empty ('') to hide it.
 export const SOCIALS = {
   email: 'denny1105kim@gmail.com',
   github: 'https://github.com/denny1105kim',
   linkedin: '',
-  resume: '', // 예: '/resume.pdf' (public 폴더에 PDF 넣기)
+  resume: '', // e.g. '/resume.pdf' (put the PDF in /public)
 };
 
 export const HIGHLIGHTS = [
   {
     value: '7,150',
-    label: '빌드 에러 해결 사례 KB',
-    detail: '공개 자료 159만 건 수집·선별',
+    label: 'Build-error resolution cases',
+    detail: 'Curated from 1.59M public records',
   },
   {
     value: '13 × 11,700',
-    label: '로컬 LLM · 평가 답변',
-    detail: 'CPU/GPU 동일 조건 비교',
+    label: 'Local LLMs · graded answers',
+    detail: 'Same questions on CPU & GPU',
   },
   {
     value: '7 GPU nodes',
     label: 'DGX ×3 · Jetson ×4',
-    detail: 'Kubernetes · KubeRay 플랫폼',
+    detail: 'Kubernetes · KubeRay platform',
   },
 ];
 
 export const STRENGTHS = [
   {
-    title: '로컬 LLM · RAG',
-    body: '폐쇄망에서 쓸 로컬 LLM 기반 빌드 오류 진단 RAG를 데이터 수집부터 평가까지 설계했습니다. FAISS·BM25 Hybrid, Graph 검색과 모델 13종을 같은 문항으로 비교했습니다.',
+    title: 'Local LLM · RAG',
+    body: 'Designed an air-gapped, local-LLM RAG system for diagnosing embedded build errors — from data collection to evaluation. Compared FAISS + BM25 hybrid and graph retrieval across 13 models on identical questions.',
   },
   {
-    title: 'AI 학습 플랫폼',
-    body: 'x86·DGX·Jetson 이기종 GPU를 k3s·KubeRay·Ray Train으로 연결하고, 작업 제출 규약·체크포인트·MLflow·Grafana 모니터링을 표준화했습니다.',
+    title: 'AI Training Platform',
+    body: 'Connected heterogeneous x86, DGX and Jetson GPUs with k3s, KubeRay and Ray Train, and standardized job submission, checkpointing, and MLflow/Grafana monitoring.',
   },
   {
-    title: 'Embedded Linux · 추론 최적화',
-    body: 'Yocto 기반 ARM64 BSP 포팅, U-Boot·Kernel·Device Tree·ROS 2 통합부터 INT8 양자화·프루닝, NPU·TensorRT 추론 검증까지 디바이스 끝단을 다룹니다.',
+    title: 'Embedded Linux · Inference Optimization',
+    body: 'Work all the way down to the device: Yocto-based ARM64 BSP porting, U-Boot / kernel / device tree / ROS 2 integration, INT8 quantization and pruning, and NPU / TensorRT inference validation.',
   },
 ];
 
 export const EXPERIENCE = [
   {
-    period: '2023.02 — 현재',
-    org: 'CoAsia (코아시아)',
-    team: 'Solution 개발팀',
+    period: 'Feb 2023 — Present',
+    org: 'CoAsia',
+    team: 'Solution Development Team',
     title: 'Software Engineer (AI Optimized Engineer)',
     items: [
-      { period: '2026.02 —', text: 'K-On Device: 비전 모델 INT8 양자화·프루닝, NPU·TensorRT 추론 검증' },
-      { period: '2025.08 —', text: 'Jetson 4대·DGX 3대 Kubernetes/KubeRay 학습·LLM 플랫폼 구축·운영' },
-      { period: '2025.02 — 2026.01', text: 'Exynos Auto V920 NPU 추론 애플리케이션 개발 (ENN SDK)' },
-      { period: '2023.12 — 2025.03', text: 'Yocto BSP·Kernel·U-Boot 포팅 및 ROS 2 구동 환경 통합' },
-      { period: '2023.02 —', text: 'Gerrit·Jenkins·Artifactory CI, Docker 기반 개발·검증 환경' },
+      { period: 'Feb 2026 —', text: 'K-On Device: INT8 quantization & pruning of vision models, NPU / TensorRT inference validation' },
+      { period: 'Aug 2025 —', text: 'Built and operate a Kubernetes / KubeRay training & LLM platform on 4 Jetsons and 3 DGX nodes' },
+      { period: 'Feb 2025 — Jan 2026', text: 'NPU inference applications on Exynos Auto V920 (ENN SDK)' },
+      { period: 'Dec 2023 — Mar 2025', text: 'Yocto BSP, kernel and U-Boot porting; ROS 2 runtime integration' },
+      { period: 'Feb 2023 —', text: 'CI with Gerrit · Jenkins · Artifactory; Docker-based dev & validation environments' },
     ],
   },
   {
-    period: '2021.04 — 2022.05',
-    org: 'KCTECH (케이씨텍)',
-    team: 'Cleaning 양산기술팀',
+    period: 'Apr 2021 — May 2022',
+    org: 'KCTECH',
+    team: 'Cleaning Mass-Production Engineering Team',
     title: 'Customer Engineer',
     items: [
-      { text: '반도체 Wet Cleaning 장비 설치·Set-Up 및 양산 안정화 지원' },
-      { text: '고객사 FAB 현장 설비 장애·알람 원인 분석과 기술 대응' },
+      { text: 'Installed and set up semiconductor wet-cleaning equipment; supported mass-production stabilization' },
+      { text: 'Root-caused equipment failures and alarms on customer fab sites and provided technical support' },
     ],
   },
 ];
 
 export const PUBLICATION = {
-  titleKo: '온프레미스 폐쇄망의 제한된 연산 자원 환경에서 임베디드 빌드 에러 진단을 위한 로컬 LLM 및 RAG 구성',
-  titleEn: 'Local LLM and RAG Configuration for Embedded Build Error Diagnosis in Resource-Constrained On-Premises Closed Networks',
-  venue: 'M.S. Thesis, Dept. of Artificial Intelligence, Ajou University',
-  advisor: '지도교수 최재영',
+  title:
+    'Local LLM and RAG Configuration for Embedded Build Error Diagnosis in Resource-Constrained On-Premises Closed Networks',
+  venue: 'M.S. Thesis, Dept. of Artificial Intelligence, Graduate School of ICT, Ajou University',
+  advisor: 'Advisor: Prof. Jaeyoung Choi',
   year: '2026',
-  status: '심사 중',
+  status: 'Under review',
   keywords: ['On-Premises', 'Local LLM', 'RAG', 'Embedded Build Error', 'Error Diagnosis'],
   results: [
-    '정답 사례가 KB에 있으면 Dense·Hybrid 검색으로 평균 성공률 약 90%',
-    '정답 사례 제외 시 No-RAG 22% → Hybrid 31~33%로 개선',
-    '검색 지연은 전체 응답 시간의 0.1%(노트북)~3%(워크스테이션) 미만',
-    '노트북: Qwen3 8B + Hybrid / 워크스테이션: Ministral 3 8B + Hybrid 선정',
+    'With the source case in the KB, Dense / Hybrid retrieval reaches ~90% average success rate',
+    'Without it, success rate improves from 22% (no RAG) to 31–33% (Hybrid)',
+    'Retrieval latency is <0.1% (laptop) to <3% (workstation) of total response time',
+    'Selected Qwen3 8B + Hybrid for laptops and Ministral 3 8B + Hybrid for workstations',
   ],
   link: '/projects/thesis-build-error-rag/',
 };
@@ -106,21 +107,21 @@ export const SKILLS = [
 
 export const EDUCATION = [
   {
-    period: '2024.03 — 2027.02',
-    title: '인공지능학과 석사 (2027.02 졸업 예정)',
-    org: '아주대학교 정보통신대학원',
+    period: 'Mar 2024 — Feb 2027',
+    title: 'M.S. in Artificial Intelligence (expected Feb 2027)',
+    org: 'Ajou University, Graduate School of ICT',
   },
   {
-    period: '2012.03 — 2020.08',
-    title: '신소재공학과 학사',
-    org: '전북대학교',
+    period: 'Mar 2012 — Aug 2020',
+    title: 'B.S. in Materials Science and Engineering',
+    org: 'Jeonbuk National University',
   },
 ];
 
 export const ACTIVITIES = [
-  { period: '2026.07 — 08', text: 'Physical AI 로봇 융합 과정' },
-  { period: '2025.10 — 2026.01', text: 'AI Master Course 4기 · AI Agent 기반 시스템 개발' },
-  { period: '2025.08', text: 'NVIDIA · Mastering LLM Optimization with RAG & Prompt Engineering' },
+  { period: 'Jul — Aug 2026', text: 'Physical AI & Robotics Convergence Program' },
+  { period: 'Oct 2025 — Jan 2026', text: 'AI Master Course (4th cohort) · AI agent-based system development' },
+  { period: 'Aug 2025', text: 'NVIDIA · Mastering LLM Optimization with RAG & Prompt Engineering' },
   { period: '2024', text: 'Google Python Course' },
-  { period: '2022.08 — 11', text: 'KAIST IDEC 교육' },
+  { period: 'Aug — Nov 2022', text: 'KAIST IDEC Training Program' },
 ];

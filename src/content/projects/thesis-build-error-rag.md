@@ -1,44 +1,44 @@
 ---
-title: '로컬 LLM · Hybrid RAG 빌드 오류 진단'
+title: 'Build Error Diagnosis with Local LLM & Hybrid RAG'
 subtitle: 'Master’s Thesis Research'
-description: '외부 API를 쓸 수 없는 폐쇄망에서 임베디드 C/C++ 빌드 오류를 로컬 LLM과 검색된 해결 사례로 진단하는 구성을 실측으로 선정한 연구.'
-period: '2024.03 — 2026.10'
-kind: '석사학위 연구 · 아주대학교'
+description: 'Measured and selected local LLM + RAG configurations that diagnose embedded C/C++ build errors in air-gapped networks where external APIs are not allowed.'
+period: 'Mar 2024 — Oct 2026'
+kind: 'M.S. research · Ajou University'
 order: 1
 tags: ['Local LLM', 'RAG', 'FAISS', 'BM25', 'Graph RAG', 'llama.cpp', 'Evaluation']
 metrics:
-  - { value: '1.59M → 7,150', label: '수집 자료 → 해결 사례 KB' }
-  - { value: '13', label: '3B~8B 로컬 LLM 비교' }
-  - { value: '11,700', label: '정답성 평가 답변' }
-  - { value: '22% → 33%', label: '정답 사례 제외 시 No-RAG → Hybrid SR' }
+  - { value: '1.59M → 7,150', label: 'Public records → curated cases' }
+  - { value: '13', label: 'Local LLMs (3B–8B) compared' }
+  - { value: '11,700', label: 'Answers graded' }
+  - { value: '22% → 33%', label: 'No-RAG → Hybrid SR (unseen cases)' }
 ---
 
-## 배경
+## Background
 
-임베디드 빌드 에러는 소스 코드만으로는 원인을 알기 어렵고, 툴체인·빌드 설정·대상 하드웨어의 관계를 함께 봐야 해결할 수 있습니다. 제품 소스와 로그의 외부 반출이 제한되는 조직에서는 **온프레미스 폐쇄망**에서 모델을 운용해야 하는데, 이때 두 가지 제약이 따릅니다.
+Embedded build errors are hard to diagnose from source code alone — the fix often depends on the toolchain, build configuration, and target hardware together. Organizations that forbid sending source code and logs outside need to run models **on-premises in a closed network**, which brings two constraints:
 
-- 내부 장비의 **연산 자원이 제한적**이다.
-- 소형 로컬 LLM만으로는 **특정 툴체인·버전에 맞는 해결 지식**이 부족하다.
+- Internal machines have **limited compute**.
+- Small local LLMs on their own lack **toolchain- and version-specific fix knowledge**.
 
-## 접근
+## Approach
 
-1. **지식베이스 구축** — GitHub 이슈, Stack Overflow, GCC Bugzilla 등 공개 자료 약 159만 건을 수집하고, 규칙 기반 선별과 LLM 구조화 추출로 *에러 메시지 · 문제 상황 · 근본 원인 · 해결 조치 · 환경 메타데이터*를 갖춘 **7,150건**의 해결 사례를 만들었습니다.
-2. **검색 구성** — Dense, Hybrid(Dense + BM25, RRF), Graph, Vector+Graph와 검색 미사용(No-RAG)을 비교했습니다.
-3. **모델 · 기기** — 3B~8B급 로컬 LLM 13종을 GPU 없는 노트북과 GPU 워크스테이션에서 llama.cpp 기반 런타임으로 실행했습니다.
-4. **평가** — 공통 50문항을 정답 사례 *포함 / 제외* 두 조건으로 나누고, Claude Sonnet을 평가 모델로 해결 조치의 일치 여부를 0~2점으로 판정해 성공률(SR)·엄격 정답률(SA)과 응답 시간을 집계했습니다.
+1. **Knowledge base** — Collected ~1.59M public records from GitHub issues, Stack Overflow, GCC Bugzilla and more, then used rule-based filtering and LLM-based structured extraction to build **7,150** resolution cases, each with *error message · context · root cause · fix · environment metadata*.
+2. **Retrieval setups** — Compared Dense, Hybrid (Dense + BM25 with RRF), Graph, Vector+Graph, and a no-retrieval baseline.
+3. **Models & devices** — Ran 13 local LLMs (3B–8B) through a llama.cpp-based runtime on a CPU-only laptop and a GPU workstation.
+4. **Evaluation** — Used 50 shared questions, each tested with its source case *included in* or *excluded from* the KB. Claude Sonnet scored whether the proposed fix matched the reference (0–2), producing success rate (SR), strict accuracy (SA), and response time.
 
-## 결과
+## Results
 
-- 정답 사례가 지식베이스에 있으면 Dense·Hybrid 검색으로 **평균 SR 약 90%** — 기록된 해결책 재활용에 매우 효과적.
-- 정답 사례를 빼면 **No-RAG 22% → Hybrid 31~33%** — 이득은 있지만 폭이 훨씬 작음.
-- Hybrid가 정답 사례 제외 조건에서 두 기기 모두 가장 높은 평균 SR.
-- 검색 지연은 전체 응답 시간의 **노트북 0.1% 미만, 워크스테이션 3% 미만** — 응답 시간은 주로 모델과 기기가 결정.
+- With the source case in the KB, Dense / Hybrid retrieval reached **~90% average SR** — very effective at reusing documented fixes.
+- Without it, SR rose from **22% (no RAG) to 31–33% (Hybrid)** — a real but much smaller gain.
+- Hybrid had the highest average SR on unseen cases on both devices.
+- Retrieval latency was **<0.1% (laptop) and <3% (workstation)** of total response time — latency is driven mostly by the model and the device.
 
-| 기기 | 최종 구성 | 선정 이유 |
+| Device | Final setup | Why |
 |---|---|---|
-| 노트북 (CPU) | **Qwen3 8B + Hybrid** | SR은 8%p 낮지만 응답 시간 절반 이하 |
-| 워크스테이션 (GPU) | **Ministral 3 8B + Hybrid** | 두 조건 모두 가장 높은 성공률 |
+| Laptop (CPU) | **Qwen3 8B + Hybrid** | 8 pp lower SR, but less than half the response time |
+| Workstation (GPU) | **Ministral 3 8B + Hybrid** | Highest SR in both conditions |
 
-두 구성 모두 모델 가중치와 지식베이스를 미리 반입하면 외부 연결 없이 내부 장비에서 운용할 수 있습니다.
+Both setups run fully offline once the model weights and knowledge base are brought inside the network.
 
-> **Thesis** — 온프레미스 폐쇄망의 제한된 연산 자원 환경에서 임베디드 빌드 에러 진단을 위한 로컬 LLM 및 RAG 구성 (*Local LLM and RAG Configuration for Embedded Build Error Diagnosis in Resource-Constrained On-Premises Closed Networks*), 아주대학교 정보통신대학원 인공지능학과, 2026.
+> **Thesis** — *Local LLM and RAG Configuration for Embedded Build Error Diagnosis in Resource-Constrained On-Premises Closed Networks*, M.S. thesis, Dept. of Artificial Intelligence, Ajou University, 2026.

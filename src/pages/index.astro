@@ -14,21 +14,23 @@ const projects = await getProjects();
 <Base>
   <section class="hero animate" style="margin-top: 24px">
     <div class="id">
-      <img src={SITE.avatar} alt={`${SITE.nameKo} 프로필 사진`} width="96" height="96" class="avatar" />
+      <img src={SITE.avatar} alt={`Portrait of ${SITE.name}`} width="96" height="96" class="avatar" />
       <div>
-        <h1>{SITE.nameKo} <span class="en">{SITE.name}</span></h1>
+        <h1>{SITE.name}</h1>
         <p class="role">{SITE.role}</p>
         <p class="where faint">@ {SITE.company} · {SITE.location}</p>
       </div>
     </div>
 
     <p class="lead">
-      보드 위의 <mark>Embedded Linux</mark>부터 <mark>Edge AI 추론 최적화</mark>, 폐쇄망 <mark>로컬 LLM·RAG</mark>,
-      그리고 GPU 클러스터의 <mark>AI 학습 플랫폼</mark>까지 — AI가 실제 장비 위에서 돌아가게 만드는 일을 합니다.
+      I make AI run on real hardware — from <mark>embedded Linux</mark> on the board,{' '}
+      to <mark>edge AI inference optimization</mark>, <mark>local LLM &amp; RAG</mark> in air-gapped networks,{' '}
+      and <mark>AI training platforms</mark> on GPU clusters.
     </p>
     <p class="sub muted">
-      Yocto BSP 포팅으로 시작해 NPU·TensorRT 추론 검증, Kubernetes·KubeRay 기반 이기종 GPU 플랫폼 운영으로 영역을
-      넓혀왔습니다. 측정 가능한 근거로 구성을 고르고, 장애를 재발 방지 규칙과 자동 점검으로 연결하는 것을 중요하게 생각합니다.
+      I started out porting Yocto BSPs, then moved into NPU / TensorRT inference validation and now build and run a
+      heterogeneous GPU platform on Kubernetes and KubeRay. I like choosing configurations based on measurements, and
+      turning every incident into a guardrail and an automated check.
     </p>
 
     <Socials />
@@ -72,13 +74,12 @@ const projects = await getProjects();
         <span class="badge">M.S. Thesis</span>
         <span class="faint small">{PUBLICATION.year} · {PUBLICATION.status}</span>
       </div>
-      <h3>{PUBLICATION.titleKo}</h3>
-      <p class="en-title">{PUBLICATION.titleEn}</p>
+      <h3>{PUBLICATION.title}</h3>
       <p class="venue faint">{PUBLICATION.venue} · {PUBLICATION.advisor}</p>
       <ul class="results">
         {PUBLICATION.results.map((r) => <li>{r}</li>)}
       </ul>
-      <span class="more">자세히 보기 →</span>
+      <span class="more">Read more →</span>
     </a>
   </section>
 
@@ -121,7 +122,7 @@ const projects = await getProjects();
 
   <section class="contact animate" style="animation-delay: 340ms">
     <h2>Let's talk.</h2>
-    <p class="muted">AI 플랫폼, Edge AI, 로컬 LLM에 관한 이야기라면 언제든 환영합니다.</p>
+    <p class="muted">Always happy to chat about AI platforms, edge AI, and local LLMs.</p>
     <Socials />
   </section>
 </Base>

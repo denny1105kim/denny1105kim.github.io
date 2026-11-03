@@ -14,10 +14,10 @@ const byYear = Object.entries(
 <Base title="Blog" description="Notes on embedded Linux, NPU, and Edge AI.">
   <div class="animate" style="margin-top: 32px">
     <h1>Blog</h1>
-    <p class="muted">임베디드, NPU, Edge AI에 대해 공부하고 일하며 배운 것들.</p>
+    <p class="muted">Notes on embedded Linux, edge AI, ML infrastructure and local LLMs.</p>
   </div>
 
-  {posts.length === 0 && <p class="muted">아직 글이 없어요.</p>}
+  {posts.length === 0 && <p class="muted">No posts yet.</p>}
 
   {byYear.map(([year, list], i) => (
     <section class="animate" style={`margin-top: 48px; animation-delay: ${80 + i * 60}ms`}>

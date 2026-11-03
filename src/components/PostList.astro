@@ -3,7 +3,7 @@ import { fmtDate, type Post } from '../utils';
 const { posts } = Astro.props as { posts: Post[] };
 ---
 {posts.length === 0 ? (
-  <p class="muted">아직 글이 없어요.</p>
+  <p class="muted">No posts yet.</p>
 ) : (
   <ul class="card-list">
     {posts.map((p) => (

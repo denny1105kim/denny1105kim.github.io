@@ -82,7 +82,7 @@ section { margin-top: 64px; }
   letter-spacing: -0.01em;
 }
 
-/* 등장 애니메이션 */
+/* Entrance animation */
 .animate {
   opacity: 0;
   transform: translateY(8px);
@@ -94,7 +94,7 @@ section { margin-top: 64px; }
   html { scroll-behavior: auto; }
 }
 
-/* 리스트 카드 */
+/* List cards */
 .card-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .card {
   display: flex;
@@ -124,7 +124,7 @@ a.card:hover .arrow { transform: translateX(3px); color: var(--fg); }
   color: var(--muted);
 }
 
-/* 본문(블로그) */
+/* Prose (posts / projects) */
 .prose { font-size: 1rem; }
 .prose h2 { font-size: 1.2rem; margin: 2.2em 0 0.6em; letter-spacing: -0.01em; }
 .prose h3 { font-size: 1.05rem; margin: 1.8em 0 0.5em; }
@@ -155,7 +155,7 @@ a.card:hover .arrow { transform: translateX(3px); color: var(--fg); }
 .prose table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1.5em 0; }
 .prose th, .prose td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; }
 
-/* 코드 하이라이트: 라이트/다크 둘 다 */
+/* Code highlighting for light and dark */
 :root.dark .astro-code,
 :root.dark .astro-code span {
   color: var(--shiki-dark) !important;

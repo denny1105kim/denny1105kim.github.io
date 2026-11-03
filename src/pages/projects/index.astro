@@ -4,10 +4,10 @@ import ProjectList from '../../components/ProjectList.astro';
 import { getProjects } from '../../utils';
 const projects = await getProjects();
 ---
-<Base title="Projects" description="연구, 회사, 개인·팀 프로젝트 모음.">
+<Base title="Projects" description="Research, work, and personal projects.">
   <div class="animate" style="margin-top: 32px">
     <h1>Projects</h1>
-    <p class="muted">로컬 LLM·RAG 연구부터 GPU 플랫폼, Edge AI 최적화, 개인·팀 프로젝트까지.</p>
+    <p class="muted">From local LLM & RAG research to GPU platforms, edge AI optimization, and side projects.</p>
   </div>
   <section class="animate" style="margin-top: 36px; animation-delay: 80ms">
     <ProjectList projects={projects} />
