@@ -7,9 +7,9 @@ tags: ['intro']
 
 새 블로그를 열었습니다. 앞으로 이 곳에는 이런 것들을 기록하려고 합니다.
 
-- 임베디드 Linux (Yocto, Kernel, U-Boot) 개발하면서 배운 것들
-- NPU 위에서 AI 모델을 변환·최적화·검증한 경험
-- Edge AI, 모델 경량화와 컴파일러에 대한 공부 노트
+- 임베디드 Linux (Yocto, Kernel, U-Boot)와 NPU·TensorRT 추론 최적화 경험
+- Kubernetes·Ray로 GPU 학습 플랫폼을 운영하며 배운 것들
+- 로컬 LLM·RAG 연구 노트
 
 ## 글 쓰는 법
 

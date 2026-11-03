@@ -6,11 +6,11 @@ Personal site built with [Astro](https://astro.build) — minimal, light/dark, f
 
 | 바꾸고 싶은 것 | 파일 |
 |---|---|
-| 이름, 직함, 경력, 학력, 관심분야, SNS 링크 | `src/site.ts` |
-| 메인 자기소개 문단 | `src/pages/index.astro` |
+| 이름, 직함, 하이라이트 수치, 경력, 논문, 스킬, 학력, 교육, 연락처 | `src/site.ts` |
+| 메인 소개 문단 | `src/pages/index.astro` |
 | 프로필 사진 | `public/avatar.jpg` (정사각형 권장) |
 | 블로그 글 추가 | `src/content/blog/*.md` |
-| 프로젝트 추가 | `src/content/projects/*.md` (`_example.md` 참고, 파일명이 `_`로 시작하면 숨김) |
+| 프로젝트 추가/수정 | `src/content/projects/*.md` (`order`로 순서 지정, 파일명이 `_`로 시작하면 숨김) |
 | 색상, 폰트 | `src/styles/global.css` |
 
 ## 로컬 실행

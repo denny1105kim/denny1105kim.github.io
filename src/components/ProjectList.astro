@@ -3,26 +3,56 @@ import type { Project } from '../utils';
 const { projects } = Astro.props as { projects: Project[] };
 ---
 {projects.length === 0 ? (
-  <p class="muted">정리 중이에요. 곧 채워질 예정입니다.</p>
+  <p class="muted">정리 중이에요.</p>
 ) : (
-  <ul class="card-list">
-    {projects.map((p) => {
-      const href = p.data.link ?? p.data.repo;
-      const Tag = href ? 'a' : 'div';
-      return (
-        <li>
-          <Tag class="card" href={href} target={href ? '_blank' : undefined} rel={href ? 'noopener noreferrer' : undefined}>
-            <div>
-              <div class="card-title">{p.data.title}</div>
-              <div class="card-desc">{p.data.description}</div>
-              {p.data.tags.length > 0 && (
-                <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div>
-              )}
+  <ul class="grid">
+    {projects.map((p) => (
+      <li>
+        <a class="pcard" href={`/projects/${p.id}/`}>
+          <div class="top">
+            <span class="kind">{p.data.subtitle}</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+          <h3>{p.data.title}</h3>
+          <p class="desc">{p.data.description}</p>
+          {p.data.metrics.length > 0 && (
+            <div class="metrics">
+              {p.data.metrics.slice(0, 2).map((m) => (
+                <div><strong>{m.value}</strong><span>{m.label}</span></div>
+              ))}
             </div>
-            {href && <span class="arrow" aria-hidden="true">↗</span>}
-          </Tag>
-        </li>
-      );
-    })}
+          )}
+          <div class="foot">
+            <span class="faint">{p.data.period}</span>
+            <span class="faint">{p.data.kind}</span>
+          </div>
+        </a>
+      </li>
+    ))}
   </ul>
 )}
+<style>
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .pcard {
+    display: block;
+    padding: 20px 20px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    text-decoration: none;
+    transition: background-color 0.15s, border-color 0.15s, transform 0.2s;
+  }
+  .pcard:hover { background: var(--card-hover); border-color: var(--line-strong); }
+  .pcard:hover .arrow { transform: translateX(3px); color: var(--fg); }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .kind { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .arrow { color: var(--faint); transition: transform 0.15s, color 0.15s; }
+  h3 { margin: 6px 0 4px; font-size: 1.05rem; letter-spacing: -0.015em; line-height: 1.45; }
+  .desc { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+  .metrics { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; }
+  .metrics div { display: flex; flex-direction: column; line-height: 1.35; }
+  .metrics strong { font-size: 0.95rem; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .metrics span { font-size: 0.75rem; color: var(--faint); }
+  .foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 0.76rem; }
+  @media (max-width: 520px) { .foot { flex-direction: column; gap: 0; } }
+</style>

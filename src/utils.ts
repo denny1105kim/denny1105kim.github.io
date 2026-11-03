@@ -11,7 +11,7 @@ export async function getPosts() {
 
 export async function getProjects() {
   return (await getCollection('projects', ({ data }) => !data.draft)).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+    (a, b) => a.data.order - b.data.order,
   );
 }
 

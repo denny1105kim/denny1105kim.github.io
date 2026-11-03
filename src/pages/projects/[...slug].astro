@@ -1,0 +1,79 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProjects } from '../../utils';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, prev: projects[i - 1], next: projects[i + 1] },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+---
+<Base title={d.title} description={d.description}>
+  <article style="margin-top: 32px">
+    <a href="/projects/" class="link muted back animate">← All projects</a>
+    <header class="animate" style="animation-delay: 60ms">
+      <span class="kind">{d.subtitle}</span>
+      <h1>{d.title}</h1>
+      <p class="desc muted">{d.description}</p>
+      <dl class="meta">
+        <div><dt>Period</dt><dd>{d.period}</dd></div>
+        <div><dt>Type</dt><dd>{d.kind}</dd></div>
+        {(d.link || d.repo) && (
+          <div><dt>Links</dt><dd>
+            {d.link && <a class="link" href={d.link} target="_blank" rel="noopener noreferrer">Website ↗</a>}
+            {d.repo && <a class="link" href={d.repo} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+          </dd></div>
+        )}
+      </dl>
+      {d.metrics.length > 0 && (
+        <div class="metrics">
+          {d.metrics.map((m) => (
+            <div class="m"><strong>{m.value}</strong><span>{m.label}</span></div>
+          ))}
+        </div>
+      )}
+      <div class="tags">{d.tags.map((t) => <span class="tag">{t}</span>)}</div>
+    </header>
+    <div class="prose animate" style="animation-delay: 120ms">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="pager">
+    {prev ? (
+      <a class="card" href={`/projects/${prev.id}/`}><div><div class="faint small">← Previous</div><div class="card-title">{prev.data.title}</div></div></a>
+    ) : <span />}
+    {next ? (
+      <a class="card right" href={`/projects/${next.id}/`}><div><div class="faint small">Next →</div><div class="card-title">{next.data.title}</div></div></a>
+    ) : <span />}
+  </nav>
+</Base>
+<style>
+  .back { font-size: 0.85rem; display: inline-block; margin-bottom: 28px; }
+  .kind { font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: 1.8rem; line-height: 1.3; letter-spacing: -0.03em; margin: 6px 0 8px; }
+  .desc { margin: 0 0 20px; font-size: 0.98rem; }
+  header { margin-bottom: 40px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 32px; margin: 0 0 20px; font-size: 0.86rem; }
+  .meta dt { color: var(--faint); font-size: 0.75rem; }
+  .meta dd { margin: 0; display: flex; gap: 12px; }
+  .metrics {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
+    margin-bottom: 16px; overflow: hidden;
+  }
+  .m { padding: 14px 16px; display: flex; flex-direction: column; border-right: 1px solid var(--line); margin-right: -1px; }
+  .m strong { font-size: 1.1rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .m span { font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 64px; }
+  .pager .right { text-align: right; justify-content: flex-end; }
+  .small { font-size: 0.78rem; }
+  @media (max-width: 520px) { .pager { grid-template-columns: 1fr; } }
+</style>

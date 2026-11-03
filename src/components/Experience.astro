@@ -1,0 +1,40 @@
+---
+import { EXPERIENCE } from '../site';
+---
+<ol class="exp">
+  {EXPERIENCE.map((e) => (
+    <li>
+      <div class="head">
+        <div>
+          <div class="org">{e.org} <span class="team">· {e.team}</span></div>
+          <div class="title">{e.title}</div>
+        </div>
+        <div class="period">{e.period}</div>
+      </div>
+      <ul class="items">
+        {e.items.map((it) => (
+          <li>
+            {'period' in it && it.period && <span class="ip">{it.period}</span>}
+            <span>{it.text}</span>
+          </li>
+        ))}
+      </ul>
+    </li>
+  ))}
+</ol>
+<style>
+  .exp { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+  .head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+  .org { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
+  .team { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+  .title { color: var(--muted); font-size: 0.88rem; }
+  .period { color: var(--faint); font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .items { list-style: none; margin: 12px 0 0; padding: 0 0 0 14px; border-left: 1px solid var(--line); display: grid; gap: 7px; }
+  .items li { font-size: 0.89rem; line-height: 1.6; display: grid; grid-template-columns: 146px 1fr; gap: 10px; }
+  .items li:not(:has(.ip)) { grid-template-columns: 1fr; }
+  .ip { color: var(--faint); font-size: 0.8rem; font-variant-numeric: tabular-nums; padding-top: 1px; }
+  @media (max-width: 560px) {
+    .head { flex-direction: column; gap: 2px; }
+    .items li { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

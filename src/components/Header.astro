@@ -2,17 +2,18 @@
 import { SITE } from '../site';
 const path = Astro.url.pathname;
 const nav = [
-  { href: '/blog/', label: 'blog' },
   { href: '/projects/', label: 'projects' },
+  { href: '/#research', label: 'research' },
+  { href: '/blog/', label: 'blog' },
 ];
 ---
 <header class="container header">
-  <a href="/" class="brand">{SITE.name}</a>
+  <a href="/" class="brand"><span class="full">{SITE.name}</span><span class="short">{SITE.nameKo}</span></a>
   <nav>
     {nav.map((n, i) => (
       <>
         {i > 0 && <span class="faint">/</span>}
-        <a href={n.href} class:list={['link', { active: path.startsWith(n.href) }]}>{n.label}</a>
+        <a href={n.href} class:list={['link', { active: !n.href.includes('#') && path.startsWith(n.href) }]}>{n.label}</a>
       </>
     ))}
     <button id="theme-toggle" aria-label="테마 전환" title="테마 전환">
@@ -56,6 +57,13 @@ const nav = [
     transition: color 0.15s, background-color 0.15s;
   }
   button:hover { color: var(--fg); background: var(--card-hover); }
+  .short { display: none; }
+  @media (max-width: 440px) {
+    .full { display: none; }
+    .short { display: inline; }
+    nav { gap: 6px; }
+    button { margin-left: 4px; }
+  }
   .moon { display: none; }
   :global(:root.dark) .sun { display: none; }
   :global(:root.dark) .moon { display: block; }

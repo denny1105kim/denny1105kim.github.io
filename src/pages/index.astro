@@ -2,93 +2,187 @@
 import Base from '../layouts/Base.astro';
 import Socials from '../components/Socials.astro';
 import Timeline from '../components/Timeline.astro';
+import Experience from '../components/Experience.astro';
 import PostList from '../components/PostList.astro';
 import ProjectList from '../components/ProjectList.astro';
-import { SITE, EXPERIENCE, EDUCATION, INTERESTS } from '../site';
+import { SITE, HIGHLIGHTS, STRENGTHS, PUBLICATION, SKILLS, EDUCATION, ACTIVITIES } from '../site';
 import { getPosts, getProjects } from '../utils';
 
 const posts = (await getPosts()).slice(0, 3);
-const projects = (await getProjects()).slice(0, 3);
+const projects = await getProjects();
 ---
 <Base>
-  <section class="hero animate" style="margin-top: 32px">
-    <img src={SITE.avatar} alt={SITE.name} width="88" height="88" class="avatar" />
-    <h1>Hi, I'm Jae Hyeon <span class="wave">👋</span></h1>
-    <p class="role muted">{SITE.role}</p>
-
-    <div class="about">
-      <p>
-        I'm an embedded software engineer pursuing a Master's degree in Intelligent Software at
-        Ajou University. I work on embedded Linux systems — Yocto-based platforms, Linux kernel and
-        U-Boot customization, and board bring-up on SoC-based hardware.
-      </p>
-      <p>
-        At work I've also been involved in NPU-based AI workflows: converting, optimizing, and
-        validating AI models on embedded devices. That's where I got hooked on <strong>Edge AI</strong>
-        — running neural networks efficiently under real hardware constraints.
-      </p>
-      <p>
-        These days I'm focused on AI model compilation, model optimization &amp; compression, and
-        efficient deployment of deep learning models on embedded systems.
-      </p>
+  <section class="hero animate" style="margin-top: 24px">
+    <div class="id">
+      <img src={SITE.avatar} alt={`${SITE.nameKo} 프로필 사진`} width="96" height="96" class="avatar" />
+      <div>
+        <h1>{SITE.nameKo} <span class="en">{SITE.name}</span></h1>
+        <p class="role">{SITE.role}</p>
+        <p class="where faint">@ {SITE.company} · {SITE.location}</p>
+      </div>
     </div>
+
+    <p class="lead">
+      보드 위의 <mark>Embedded Linux</mark>부터 <mark>Edge AI 추론 최적화</mark>, 폐쇄망 <mark>로컬 LLM·RAG</mark>,
+      그리고 GPU 클러스터의 <mark>AI 학습 플랫폼</mark>까지 — AI가 실제 장비 위에서 돌아가게 만드는 일을 합니다.
+    </p>
+    <p class="sub muted">
+      Yocto BSP 포팅으로 시작해 NPU·TensorRT 추론 검증, Kubernetes·KubeRay 기반 이기종 GPU 플랫폼 운영으로 영역을
+      넓혀왔습니다. 측정 가능한 근거로 구성을 고르고, 장애를 재발 방지 규칙과 자동 점검으로 연결하는 것을 중요하게 생각합니다.
+    </p>
 
     <Socials />
   </section>
 
-  <section class="animate" style="animation-delay: 80ms">
-    <div class="section-head"><h2 class="section-title">Interests</h2></div>
-    <div class="tags">{INTERESTS.map((t) => <span class="tag">{t}</span>)}</div>
+  <section class="stats animate" style="animation-delay: 60ms; margin-top: 48px">
+    {HIGHLIGHTS.map((h) => (
+      <div class="stat">
+        <div class="v">{h.value}</div>
+        <div class="l">{h.label}</div>
+        <div class="d faint">{h.detail}</div>
+      </div>
+    ))}
   </section>
 
-  <section class="animate" style="animation-delay: 140ms">
+  <section class="animate" style="animation-delay: 120ms">
+    <div class="section-head"><h2 class="section-title">What I do</h2></div>
+    <div class="strengths">
+      {STRENGTHS.map((s, i) => (
+        <div class="strength">
+          <span class="num">0{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="animate" style="animation-delay: 160ms">
+    <div class="section-head">
+      <h2 class="section-title">Featured Projects</h2>
+      <a href="/projects/" class="link muted small">All projects</a>
+    </div>
+    <ProjectList projects={projects} />
+  </section>
+
+  <section id="research" class="animate" style="animation-delay: 200ms">
+    <div class="section-head"><h2 class="section-title">Research</h2></div>
+    <a class="paper" href={PUBLICATION.link}>
+      <div class="paper-top">
+        <span class="badge">M.S. Thesis</span>
+        <span class="faint small">{PUBLICATION.year} · {PUBLICATION.status}</span>
+      </div>
+      <h3>{PUBLICATION.titleKo}</h3>
+      <p class="en-title">{PUBLICATION.titleEn}</p>
+      <p class="venue faint">{PUBLICATION.venue} · {PUBLICATION.advisor}</p>
+      <ul class="results">
+        {PUBLICATION.results.map((r) => <li>{r}</li>)}
+      </ul>
+      <span class="more">자세히 보기 →</span>
+    </a>
+  </section>
+
+  <section class="animate" style="animation-delay: 240ms">
     <div class="section-head"><h2 class="section-title">Experience</h2></div>
-    <Timeline items={EXPERIENCE} />
+    <Experience />
   </section>
 
-  <section class="animate" style="animation-delay: 200ms">
+  <section class="animate" style="animation-delay: 260ms">
+    <div class="section-head"><h2 class="section-title">Skills</h2></div>
+    <dl class="skills">
+      {SKILLS.map((g) => (
+        <div class="row">
+          <dt>{g.group}</dt>
+          <dd><div class="tags">{g.items.map((t) => <span class="tag">{t}</span>)}</div></dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="animate" style="animation-delay: 280ms">
     <div class="section-head"><h2 class="section-title">Education</h2></div>
     <Timeline items={EDUCATION} />
   </section>
 
-  <section class="animate" style="animation-delay: 260ms">
-    <div class="section-head">
-      <h2 class="section-title">Latest posts</h2>
-      <a href="/blog/" class="link muted small">See all posts</a>
-    </div>
-    <PostList posts={posts} />
+  <section class="animate" style="animation-delay: 300ms">
+    <div class="section-head"><h2 class="section-title">Training & Activities</h2></div>
+    <Timeline items={ACTIVITIES.map((a) => ({ period: a.period, title: a.text, org: '' }))} />
   </section>
 
-  <section class="animate" style="animation-delay: 320ms">
-    <div class="section-head">
-      <h2 class="section-title">Projects</h2>
-      <a href="/projects/" class="link muted small">See all projects</a>
-    </div>
-    <ProjectList projects={projects} />
+  {posts.length > 0 && (
+    <section class="animate" style="animation-delay: 320ms">
+      <div class="section-head">
+        <h2 class="section-title">Latest posts</h2>
+        <a href="/blog/" class="link muted small">See all posts</a>
+      </div>
+      <PostList posts={posts} />
+    </section>
+  )}
+
+  <section class="contact animate" style="animation-delay: 340ms">
+    <h2>Let's talk.</h2>
+    <p class="muted">AI 플랫폼, Edge AI, 로컬 LLM에 관한 이야기라면 언제든 환영합니다.</p>
+    <Socials />
   </section>
 </Base>
 
 <style>
+  .id { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
   .avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
     border: 1px solid var(--line);
-    margin-bottom: 24px;
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line);
   }
-  h1 { font-size: 1.6rem; line-height: 1.3; letter-spacing: -0.025em; margin: 0; font-weight: 700; }
-  .role { margin: 6px 0 20px; font-size: 0.95rem; }
-  .about p { margin: 0 0 14px; }
-  .about strong { font-weight: 600; }
-  .about { margin-bottom: 24px; }
+  h1 { font-size: 1.65rem; line-height: 1.25; letter-spacing: -0.03em; margin: 0; font-weight: 700; }
+  .en { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: -0.01em; margin-left: 4px; }
+  .role { margin: 4px 0 0; font-size: 0.92rem; font-weight: 500; }
+  .where { margin: 0; font-size: 0.84rem; }
+  .lead { font-size: 1.12rem; line-height: 1.75; letter-spacing: -0.015em; margin: 0 0 14px; font-weight: 500; }
+  mark { background: none; color: inherit; background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 22%, transparent) 62%); padding: 0 1px; }
+  .sub { margin: 0 0 24px; font-size: 0.93rem; }
   .small { font-size: 0.82rem; }
-  .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s ease-in-out 0.6s 1; }
-  @keyframes wave {
-    0%, 60%, 100% { transform: rotate(0); }
-    10%, 30% { transform: rotate(14deg); }
-    20% { transform: rotate(-8deg); }
-    40% { transform: rotate(-4deg); }
-    50% { transform: rotate(10deg); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+  .stat { padding: 18px 18px 16px; }
+  .stat + .stat { border-left: 1px solid var(--line); }
+  .v { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .l { font-size: 0.84rem; margin-top: 2px; }
+  .d { font-size: 0.75rem; }
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: 1fr; }
+    .stat + .stat { border-left: 0; border-top: 1px solid var(--line); }
   }
+
+  .strengths { display: grid; gap: 20px; }
+  .strength { display: grid; grid-template-columns: 36px 1fr; column-gap: 8px; }
+  .num { grid-row: span 2; color: var(--accent); font-size: 0.8rem; font-weight: 600; font-variant-numeric: tabular-nums; padding-top: 3px; }
+  .strength h3 { margin: 0; font-size: 0.98rem; letter-spacing: -0.01em; }
+  .strength p { margin: 2px 0 0; color: var(--muted); font-size: 0.89rem; line-height: 1.7; }
+
+  .paper {
+    display: block; text-decoration: none; padding: 22px; border-radius: var(--radius);
+    border: 1px solid var(--line); background: var(--card);
+    transition: background-color 0.15s, border-color 0.15s;
+  }
+  .paper:hover { background: var(--card-hover); border-color: var(--line-strong); }
+  .paper:hover .more { color: var(--fg); }
+  .paper-top { display: flex; justify-content: space-between; align-items: center; }
+  .badge { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .paper h3 { margin: 8px 0 4px; font-size: 1.05rem; line-height: 1.5; letter-spacing: -0.015em; }
+  .en-title { margin: 0; font-size: 0.86rem; color: var(--muted); font-style: italic; line-height: 1.55; }
+  .venue { margin: 8px 0 0; font-size: 0.8rem; }
+  .results { margin: 14px 0 0; padding-left: 18px; font-size: 0.87rem; line-height: 1.7; }
+  .results li::marker { color: var(--accent); }
+  .more { display: inline-block; margin-top: 12px; font-size: 0.82rem; color: var(--muted); transition: color 0.15s; }
+
+  .skills { margin: 0; display: grid; gap: 12px; }
+  .row { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: start; }
+  dt { font-size: 0.84rem; color: var(--muted); padding-top: 3px; }
+  dd { margin: 0; }
+  dd .tags { margin-top: 0; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 6px; } }
+
+  .contact { margin-top: 88px; padding: 32px 0 0; border-top: 1px solid var(--line); }
+  .contact h2 { margin: 0; font-size: 1.4rem; letter-spacing: -0.03em; }
+  .contact p { margin: 4px 0 18px; font-size: 0.92rem; }
 </style>

@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import { getProjects } from '../../utils';
+const projects = await getProjects();
+---
+<Base title="Projects" description="연구, 회사, 개인·팀 프로젝트 모음.">
+  <div class="animate" style="margin-top: 32px">
+    <h1>Projects</h1>
+    <p class="muted">로컬 LLM·RAG 연구부터 GPU 플랫폼, Edge AI 최적화, 개인·팀 프로젝트까지.</p>
+  </div>
+  <section class="animate" style="margin-top: 36px; animation-delay: 80ms">
+    <ProjectList projects={projects} />
+  </section>
+</Base>
+<style>
+  h1 { font-size: 1.6rem; letter-spacing: -0.025em; margin: 0 0 6px; }
+</style>

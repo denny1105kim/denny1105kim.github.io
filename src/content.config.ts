@@ -18,9 +18,13 @@ const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/[^_]*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
+    subtitle: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
+    period: z.string(),
+    kind: z.string(), // 회사 / 개인 / 팀 / 연구
+    order: z.number().default(99), // 작을수록 위에 표시
     tags: z.array(z.string()).default([]),
+    metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     link: z.string().url().optional(),
     repo: z.string().url().optional(),
     draft: z.boolean().default(false),

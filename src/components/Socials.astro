@@ -1,11 +1,10 @@
 ---
 import { SOCIALS } from '../site';
 const items = [
-  { key: 'github', label: 'GitHub', href: SOCIALS.github },
   { key: 'email', label: 'Email', href: SOCIALS.email && `mailto:${SOCIALS.email}` },
+  { key: 'github', label: 'GitHub', href: SOCIALS.github },
   { key: 'linkedin', label: 'LinkedIn', href: SOCIALS.linkedin },
-  { key: 'scholar', label: 'Scholar', href: SOCIALS.scholar },
-  { key: 'cv', label: 'CV', href: SOCIALS.cv },
+  { key: 'resume', label: 'Resume', href: SOCIALS.resume },
 ].filter((i) => i.href);
 ---
 <ul>
