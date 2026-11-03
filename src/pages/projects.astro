@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { getProjects } from '../utils';
+const projects = await getProjects();
+---
+<Base title="Projects" description="Things I've built and worked on.">
+  <div class="animate" style="margin-top: 32px">
+    <h1>Projects</h1>
+    <p class="muted">직접 만들거나 참여했던 것들.</p>
+  </div>
+  <section class="animate" style="margin-top: 40px; animation-delay: 80ms">
+    <ProjectList projects={projects} />
+  </section>
+</Base>
+<style>
+  h1 { font-size: 1.6rem; letter-spacing: -0.025em; margin: 0 0 6px; }
+</style>

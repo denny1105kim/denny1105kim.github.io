@@ -1,0 +1,36 @@
+---
+import { SOCIALS } from '../site';
+const items = [
+  { key: 'github', label: 'GitHub', href: SOCIALS.github },
+  { key: 'email', label: 'Email', href: SOCIALS.email && `mailto:${SOCIALS.email}` },
+  { key: 'linkedin', label: 'LinkedIn', href: SOCIALS.linkedin },
+  { key: 'scholar', label: 'Scholar', href: SOCIALS.scholar },
+  { key: 'cv', label: 'CV', href: SOCIALS.cv },
+].filter((i) => i.href);
+---
+<ul>
+  {items.map((i) => (
+    <li>
+      <a class="pill" href={i.href} target={i.key === 'email' ? undefined : '_blank'} rel="noopener noreferrer">
+        {i.label} <span aria-hidden="true">↗</span>
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+  .pill {
+    display: inline-flex;
+    gap: 6px;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.15s, background-color 0.15s;
+  }
+  .pill:hover { color: var(--fg); background: var(--card-hover); }
+  span { color: var(--faint); }
+</style>

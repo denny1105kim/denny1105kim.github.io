@@ -1,0 +1,25 @@
+---
+import { fmtDate, type Post } from '../utils';
+const { posts } = Astro.props as { posts: Post[] };
+---
+{posts.length === 0 ? (
+  <p class="muted">아직 글이 없어요.</p>
+) : (
+  <ul class="card-list">
+    {posts.map((p) => (
+      <li>
+        <a class="card" href={`/blog/${p.id}/`}>
+          <div>
+            <div class="card-title">{p.data.title}</div>
+            <div class="card-desc">{p.data.description}</div>
+          </div>
+          <time class="date faint" datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+<style>
+  .date { font-size: 0.8rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  @media (max-width: 520px) { .date { display: none; } }
+</style>

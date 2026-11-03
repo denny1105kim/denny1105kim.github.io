@@ -1,0 +1,28 @@
+---
+import type { Project } from '../utils';
+const { projects } = Astro.props as { projects: Project[] };
+---
+{projects.length === 0 ? (
+  <p class="muted">정리 중이에요. 곧 채워질 예정입니다.</p>
+) : (
+  <ul class="card-list">
+    {projects.map((p) => {
+      const href = p.data.link ?? p.data.repo;
+      const Tag = href ? 'a' : 'div';
+      return (
+        <li>
+          <Tag class="card" href={href} target={href ? '_blank' : undefined} rel={href ? 'noopener noreferrer' : undefined}>
+            <div>
+              <div class="card-title">{p.data.title}</div>
+              <div class="card-desc">{p.data.description}</div>
+              {p.data.tags.length > 0 && (
+                <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              )}
+            </div>
+            {href && <span class="arrow" aria-hidden="true">↗</span>}
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+)}

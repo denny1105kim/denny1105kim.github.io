@@ -1,0 +1,22 @@
+---
+import { SITE } from '../site';
+const year = new Date().getFullYear();
+---
+<footer class="container">
+  <div class="line">
+    <span>© {year} {SITE.name}</span>
+    <a href="#" class="link">back to top ↑</a>
+  </div>
+</footer>
+<style>
+  footer { margin-top: 96px; padding-bottom: 40px; }
+  .line {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    color: var(--faint);
+  }
+  a:hover { color: var(--fg); }
+</style>

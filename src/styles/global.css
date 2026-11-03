@@ -1,0 +1,159 @@
+:root {
+  --bg: #fafaf9;
+  --fg: #18181b;
+  --muted: #71717a;
+  --faint: #a1a1aa;
+  --line: #e7e5e4;
+  --card: #ffffff;
+  --card-hover: #f5f5f4;
+  --accent: #2563eb;
+  --code-bg: #f4f4f5;
+  --radius: 12px;
+  color-scheme: light;
+}
+:root.dark {
+  --bg: #0b0b0c;
+  --fg: #ededee;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+  --line: #27272a;
+  --card: #131315;
+  --card-hover: #1a1a1d;
+  --accent: #60a5fa;
+  --code-bg: #18181b;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.muted { color: var(--muted); }
+.faint { color: var(--faint); }
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+.link:hover { text-decoration-color: currentColor; }
+
+section { margin-top: 64px; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* 등장 애니메이션 */
+.animate {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .animate { animation: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* 리스트 카드 */
+.card-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+a.card:hover { background: var(--card-hover); }
+a.card:hover .arrow { transform: translateX(3px); color: var(--fg); }
+.card-title { font-weight: 500; font-size: 0.95rem; line-height: 1.5; }
+.card-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.5; margin-top: 2px; }
+.arrow { color: var(--faint); flex-shrink: 0; transition: transform 0.15s ease, color 0.15s ease; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag {
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* 본문(블로그) */
+.prose { font-size: 1rem; }
+.prose h2 { font-size: 1.2rem; margin: 2.2em 0 0.6em; letter-spacing: -0.01em; }
+.prose h3 { font-size: 1.05rem; margin: 1.8em 0 0.5em; }
+.prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
+.prose a { color: var(--accent); text-underline-offset: 3px; }
+.prose img { border-radius: var(--radius); margin: 1.5em 0; }
+.prose blockquote {
+  margin: 1.5em 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+  color: var(--muted);
+}
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.prose :not(pre) > code {
+  font-size: 0.86em;
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.prose pre {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+.prose table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1.5em 0; }
+.prose th, .prose td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; }
+
+/* 코드 하이라이트: 라이트/다크 둘 다 */
+:root.dark .astro-code,
+:root.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

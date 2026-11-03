@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Socials from '../components/Socials.astro';
+import Timeline from '../components/Timeline.astro';
+import PostList from '../components/PostList.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { SITE, EXPERIENCE, EDUCATION, INTERESTS } from '../site';
+import { getPosts, getProjects } from '../utils';
+
+const posts = (await getPosts()).slice(0, 3);
+const projects = (await getProjects()).slice(0, 3);
+---
+<Base>
+  <section class="hero animate" style="margin-top: 32px">
+    <img src={SITE.avatar} alt={SITE.name} width="88" height="88" class="avatar" />
+    <h1>Hi, I'm Jae Hyeon <span class="wave">👋</span></h1>
+    <p class="role muted">{SITE.role}</p>
+
+    <div class="about">
+      <p>
+        I'm an embedded software engineer pursuing a Master's degree in Intelligent Software at
+        Ajou University. I work on embedded Linux systems — Yocto-based platforms, Linux kernel and
+        U-Boot customization, and board bring-up on SoC-based hardware.
+      </p>
+      <p>
+        At work I've also been involved in NPU-based AI workflows: converting, optimizing, and
+        validating AI models on embedded devices. That's where I got hooked on <strong>Edge AI</strong>
+        — running neural networks efficiently under real hardware constraints.
+      </p>
+      <p>
+        These days I'm focused on AI model compilation, model optimization &amp; compression, and
+        efficient deployment of deep learning models on embedded systems.
+      </p>
+    </div>
+
+    <Socials />
+  </section>
+
+  <section class="animate" style="animation-delay: 80ms">
+    <div class="section-head"><h2 class="section-title">Interests</h2></div>
+    <div class="tags">{INTERESTS.map((t) => <span class="tag">{t}</span>)}</div>
+  </section>
+
+  <section class="animate" style="animation-delay: 140ms">
+    <div class="section-head"><h2 class="section-title">Experience</h2></div>
+    <Timeline items={EXPERIENCE} />
+  </section>
+
+  <section class="animate" style="animation-delay: 200ms">
+    <div class="section-head"><h2 class="section-title">Education</h2></div>
+    <Timeline items={EDUCATION} />
+  </section>
+
+  <section class="animate" style="animation-delay: 260ms">
+    <div class="section-head">
+      <h2 class="section-title">Latest posts</h2>
+      <a href="/blog/" class="link muted small">See all posts</a>
+    </div>
+    <PostList posts={posts} />
+  </section>
+
+  <section class="animate" style="animation-delay: 320ms">
+    <div class="section-head">
+      <h2 class="section-title">Projects</h2>
+      <a href="/projects/" class="link muted small">See all projects</a>
+    </div>
+    <ProjectList projects={projects} />
+  </section>
+</Base>
+
+<style>
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    margin-bottom: 24px;
+  }
+  h1 { font-size: 1.6rem; line-height: 1.3; letter-spacing: -0.025em; margin: 0; font-weight: 700; }
+  .role { margin: 6px 0 20px; font-size: 0.95rem; }
+  .about p { margin: 0 0 14px; }
+  .about strong { font-weight: 600; }
+  .about { margin-bottom: 24px; }
+  .small { font-size: 0.82rem; }
+  .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s ease-in-out 0.6s 1; }
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+</style>
