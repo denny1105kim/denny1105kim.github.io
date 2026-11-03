@@ -14,24 +14,35 @@ const projects = await getProjects();
 <Base>
   <section class="hero animate" style="margin-top: 24px">
     <div class="id">
-      <img src={SITE.avatar} alt={`Portrait of ${SITE.name}`} width="96" height="96" class="avatar" />
+      <img src={SITE.avatar} alt={`Portrait of ${SITE.legalName}`} width="96" height="96" class="avatar" />
       <div>
-        <h1>{SITE.name}</h1>
+        <h1>{SITE.name} <span class="en">{SITE.legalName}</span></h1>
         <p class="role">{SITE.role}</p>
         <p class="where faint">@ {SITE.company} · {SITE.location}</p>
       </div>
     </div>
 
     <p class="lead">
-      I make AI run on real hardware — from <mark>embedded Linux</mark> on the board,{' '}
-      to <mark>edge AI inference optimization</mark>, <mark>local LLM &amp; RAG</mark> in air-gapped networks,{' '}
-      and <mark>AI training platforms</mark> on GPU clusters.
+      Embedded software engineer turned <mark>edge AI</mark> engineer.
+      I bring AI from the cloud down to the device — and keep it running where the internet can't reach.
     </p>
-    <p class="sub muted">
-      I started out porting Yocto BSPs, then moved into NPU / TensorRT inference validation and now build and run a
-      heterogeneous GPU platform on Kubernetes and KubeRay. I like choosing configurations based on measurements, and
-      turning every incident into a guardrail and an automated check.
-    </p>
+    <div class="journey">
+      <div class="step">
+        <span class="when">Started</span>
+        <span class="what">Embedded Linux</span>
+        <span class="how">Board bring-up, BSP porting, device drivers</span>
+      </div>
+      <div class="step">
+        <span class="when">Now</span>
+        <span class="what">Edge AI</span>
+        <span class="how">On-device inference on NPUs &amp; Jetson</span>
+      </div>
+      <div class="step">
+        <span class="when">Research</span>
+        <span class="what">On-prem LLM &amp; RAG</span>
+        <span class="how">Local LLMs for air-gapped networks</span>
+      </div>
+    </div>
 
     <Socials />
   </section>
@@ -39,6 +50,7 @@ const projects = await getProjects();
   <section class="stats animate" style="animation-delay: 60ms; margin-top: 48px">
     {HIGHLIGHTS.map((h) => (
       <div class="stat">
+        <div class="area">{h.area}</div>
         <div class="v">{h.value}</div>
         <div class="l">{h.label}</div>
         <div class="d faint">{h.detail}</div>
@@ -136,9 +148,23 @@ const projects = await getProjects();
   }
   h1 { font-size: 1.65rem; line-height: 1.25; letter-spacing: -0.03em; margin: 0; font-weight: 700; }
   .en { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: -0.01em; margin-left: 4px; }
+  @media (max-width: 600px) { .en { display: block; margin: 2px 0 0; font-size: 0.85rem; } }
   .role { margin: 4px 0 0; font-size: 0.92rem; font-weight: 500; }
   .where { margin: 0; font-size: 0.84rem; }
-  .lead { font-size: 1.12rem; line-height: 1.75; letter-spacing: -0.015em; margin: 0 0 14px; font-weight: 500; }
+  .lead { font-size: 1.22rem; line-height: 1.6; letter-spacing: -0.02em; margin: 0 0 22px; font-weight: 600; }
+  .journey {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 26px;
+    border-left: 2px solid var(--accent);
+  }
+  .step { display: flex; flex-direction: column; padding: 2px 16px; position: relative; }
+  .step + .step { border-left: 1px solid var(--line); }
+  .when { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .what { font-size: 0.98rem; font-weight: 650; letter-spacing: -0.01em; margin-top: 2px; }
+  .how { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  @media (max-width: 600px) {
+    .journey { grid-template-columns: 1fr; gap: 12px; }
+    .step + .step { border-left: 0; }
+  }
   mark { background: none; color: inherit; background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 22%, transparent) 62%); padding: 0 1px; }
   .sub { margin: 0 0 24px; font-size: 0.93rem; }
   .small { font-size: 0.82rem; }
@@ -146,6 +172,7 @@ const projects = await getProjects();
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
   .stat { padding: 18px 18px 16px; }
   .stat + .stat { border-left: 1px solid var(--line); }
+  .area { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
   .v { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
   .l { font-size: 0.84rem; margin-top: 2px; }
   .d { font-size: 0.75rem; }

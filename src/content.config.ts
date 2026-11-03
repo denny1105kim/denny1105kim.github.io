@@ -25,6 +25,8 @@ const projects = defineCollection({
     order: z.number().default(99), // lower comes first
     tags: z.array(z.string()).default([]),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+    cover: z.string().optional(), // image in /public, shown on cards
+    coverAlt: z.string().default(''),
     link: z.string().url().optional(),
     repo: z.string().url().optional(),
     draft: z.boolean().default(false),

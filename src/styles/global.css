@@ -130,7 +130,15 @@ a.card:hover .arrow { transform: translateX(3px); color: var(--fg); }
 .prose h3 { font-size: 1.05rem; margin: 1.8em 0 0.5em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
 .prose a { color: var(--accent); text-underline-offset: 3px; }
-.prose img { border-radius: var(--radius); margin: 1.5em 0; }
+.prose img { border-radius: var(--radius); margin: 1.6em 0 0.6em; border: 1px solid var(--line); width: 100%; height: auto; }
+.prose p:has(> img) em {
+  display: block;
+  text-align: center;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--faint);
+  margin-bottom: 1.4em;
+}
 .prose blockquote {
   margin: 1.5em 0;
   padding-left: 16px;

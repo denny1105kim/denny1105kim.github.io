@@ -5,6 +5,8 @@ description: 'Single-handedly built and operate a shared training and domain-LLM
 period: 'Aug 2025 — Present'
 kind: 'Internal project · Solo'
 order: 2
+cover: '/projects/gpu-ray-platform/architecture.svg'
+coverAlt: 'DGX and Jetson nodes connected with Kubernetes and KubeRay'
 tags: ['Kubernetes', 'k3s', 'KubeRay', 'Ray Train', 'MLflow', 'Prometheus', 'Grafana', 'LoRA']
 metrics:
   - { value: 'DGX ×3', label: 'Parallel LLM serving · LoRA' }
@@ -13,6 +15,9 @@ metrics:
 ---
 
 ## Overview
+
+![Platform architecture](/projects/gpu-ray-platform/architecture.svg)
+
 
 Connected the company's x86, DGX GB10 and Jetson GPUs into one cluster so that anyone can submit and track training jobs the same way. The platform is continuously updated and maintained.
 
@@ -25,6 +30,12 @@ Connected the company's x86, DGX GB10 and Jetson GPUs into one cluster so that a
 - Resolved Jetson (ARM64) GPU runtime, container, and networking compatibility issues
 - Integrated Prometheus / Grafana resource monitoring and MLflow experiment tracking
 - Measured 3-node training throughput and inter-node communication bottlenecks
+
+![Ray dashboard — node and resource status](/projects/gpu-ray-platform/cluster.png)
+*Ray dashboard: node and CPU / GPU resource status.*
+
+![Ray dashboard — job list](/projects/gpu-ray-platform/jobs.png)
+*Training jobs submitted through the Ray Jobs API.*
 
 ## Before → After
 

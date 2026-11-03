@@ -1,14 +1,15 @@
 // Personal info used across the site. Most edits only need this file.
 export const SITE = {
-  name: 'Jae Hyeon Kim',
+  name: 'Denny Kim',
+  legalName: 'Jae Hyeon Kim',
   nameKo: '김재현',
-  shortName: 'JH Kim',
-  title: 'Jae Hyeon Kim',
+  shortName: 'Denny Kim',
+  title: 'Denny Kim (Jae Hyeon Kim)',
   role: 'Software Engineer (AI Optimized Engineer)',
   company: 'CoAsia',
   location: 'Hwaseong, South Korea',
   description:
-    'Software engineer working across embedded Linux, edge AI inference optimization, on-premises local LLM & RAG, and Kubernetes/Ray-based AI training platforms.',
+    'Embedded software engineer turned edge AI engineer — board bring-up and device drivers, on-device inference optimization, and on-premises local LLM & RAG research.',
   avatar: '/avatar.jpg',
 };
 
@@ -16,40 +17,47 @@ export const SITE = {
 export const SOCIALS = {
   email: 'denny1105kim@gmail.com',
   github: 'https://github.com/denny1105kim',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/jae-hyeon-kim-60851123b/',
   resume: '', // e.g. '/resume.pdf' (put the PDF in /public)
 };
 
 export const HIGHLIGHTS = [
   {
-    value: '7,150',
-    label: 'Build-error resolution cases',
-    detail: 'Curated from 1.59M public records',
+    area: 'Embedded Linux',
+    value: 'ARM64 BSP',
+    label: 'Yocto BSP for a robot controller',
+    detail: 'U-Boot · kernel · device tree · drivers · ROS 2',
   },
   {
-    value: '13 × 11,700',
-    label: 'Local LLMs · graded answers',
-    detail: 'Same questions on CPU & GPU',
+    area: 'Edge AI',
+    value: 'INT8 + Pruning',
+    label: 'Vision models on NPU & Jetson Orin',
+    detail: 'Face · object · stereo depth · TensorRT',
   },
   {
-    value: '7 GPU nodes',
-    label: 'DGX ×3 · Jetson ×4',
-    detail: 'Kubernetes · KubeRay platform',
+    area: 'Research',
+    value: '7,150 cases',
+    label: 'On-prem RAG for build-error diagnosis',
+    detail: '13 local LLMs · 11,700 graded answers',
   },
 ];
 
 export const STRENGTHS = [
   {
-    title: 'Local LLM · RAG',
-    body: 'Designed an air-gapped, local-LLM RAG system for diagnosing embedded build errors — from data collection to evaluation. Compared FAISS + BM25 hybrid and graph retrieval across 13 models on identical questions.',
+    title: 'Embedded Linux',
+    body: 'Where I started. Yocto-based ARM64 BSPs, U-Boot and Linux kernel porting, device tree and device-driver debugging, board bring-up, and cross-compiling ROS 2 with the Yocto SDK — plus the Gerrit / Jenkins / Artifactory CI around it.',
   },
   {
-    title: 'AI Training Platform',
-    body: 'Connected heterogeneous x86, DGX and Jetson GPUs with k3s, KubeRay and Ray Train, and standardized job submission, checkpointing, and MLflow/Grafana monitoring.',
+    title: 'Distributed Computing',
+    body: 'Built and run a heterogeneous GPU cluster — 3 DGX and 4 Jetson nodes — on Kubernetes and KubeRay. Standardized Ray job submission and checkpointing, ran parallel LLM serving and LoRA fine-tuning, and wired up Prometheus, Grafana and MLflow.',
   },
   {
-    title: 'Embedded Linux · Inference Optimization',
-    body: 'Work all the way down to the device: Yocto-based ARM64 BSP porting, U-Boot / kernel / device tree / ROS 2 integration, INT8 quantization and pruning, and NPU / TensorRT inference validation.',
+    title: 'Edge AI',
+    body: 'Bring PyTorch / ONNX models onto real devices: conversion for Exynos NPUs and TensorRT, INT8 quantization and structured pruning, and validation of accuracy, latency, FPS and memory for face, object and stereo-depth models.',
+  },
+  {
+    title: 'Research · On-Prem LLM & RAG',
+    body: 'M.S. thesis on diagnosing embedded build errors in air-gapped networks: a 7,150-case knowledge base curated from 1.59M public records, hybrid (Dense + BM25) and graph retrieval, and 13 local LLMs benchmarked on CPU and GPU.',
   },
 ];
 

@@ -5,6 +5,8 @@ description: 'An automated trading and operations system that chains market data
 period: 'Jun 2026 — Present'
 kind: 'Personal project · Design / build / operate'
 order: 4
+cover: '/projects/aistock/pipeline.jpg'
+coverAlt: 'AISTOCK pipeline monitoring dashboard'
 tags: ['Kubernetes', 'TimescaleDB', 'ML', 'LLM', 'Claude Code', 'Codex']
 metrics:
   - { value: '4 nodes', label: 'Role-separated Kubernetes' }
@@ -12,6 +14,10 @@ metrics:
 ---
 
 ## Overview
+
+![AISTOCK pipeline monitoring — collection, validation, signals and orders](/projects/aistock/pipeline.jpg)
+*Live monitoring of the collection → validation → signal → order stages.*
+
 
 ```
 Collect (APIs / news) → Validate (PIT / quality) → Decide (ML / LLM) → Operate (checks / recovery)

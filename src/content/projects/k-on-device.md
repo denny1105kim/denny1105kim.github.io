@@ -5,6 +5,8 @@ description: 'Compress and deploy face recognition, object detection and stereo 
 period: 'Feb 2026 — Present'
 kind: 'Company project · Team of 8'
 order: 3
+cover: '/projects/k-on-device/depth.jpg'
+coverAlt: 'Stereo depth estimation running on device'
 tags: ['TensorRT', 'NPU', 'ONNX', 'INT8', 'Pruning', 'Jetson Orin', 'PyTorch']
 metrics:
   - { value: 'FP16 / INT8', label: 'Accuracy & speed per precision' }
@@ -16,8 +18,15 @@ metrics:
 Convert and deploy a range of computer vision models on embedded devices, then validate inference results and runtime performance after compression.
 
 ```
-Camera frame → GPU pre-processing (resize · normalize) → NPU / TensorRT inference → post-processing · validation
+Camera frame → GPU pre-processing (resize · normalize)
+  → NPU / TensorRT inference → post-processing · validation
 ```
+
+![Face detection and recognition on device](/projects/k-on-device/face.jpg)
+*Face detection & recognition running on the device.*
+
+![Object detection and stereo depth estimation with BEV](/projects/k-on-device/depth.jpg)
+*Object detection + stereo depth estimation (BEV) — Jetson-based application and inference validation.*
 
 ## What I do
 

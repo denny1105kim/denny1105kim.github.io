@@ -5,6 +5,8 @@ description: 'Measured and selected local LLM + RAG configurations that diagnose
 period: 'Mar 2024 — Oct 2026'
 kind: 'M.S. research · Ajou University'
 order: 1
+cover: '/projects/thesis-build-error-rag/pipeline.svg'
+coverAlt: 'Knowledge base construction and air-gapped diagnosis pipeline'
 tags: ['Local LLM', 'RAG', 'FAISS', 'BM25', 'Graph RAG', 'llama.cpp', 'Evaluation']
 metrics:
   - { value: '1.59M → 7,150', label: 'Public records → curated cases' }
@@ -22,6 +24,9 @@ Embedded build errors are hard to diagnose from source code alone — the fix of
 
 ## Approach
 
+![Knowledge base construction and air-gapped diagnosis pipeline](/projects/thesis-build-error-rag/pipeline.svg)
+
+
 1. **Knowledge base** — Collected ~1.59M public records from GitHub issues, Stack Overflow, GCC Bugzilla and more, then used rule-based filtering and LLM-based structured extraction to build **7,150** resolution cases, each with *error message · context · root cause · fix · environment metadata*.
 2. **Retrieval setups** — Compared Dense, Hybrid (Dense + BM25 with RRF), Graph, Vector+Graph, and a no-retrieval baseline.
 3. **Models & devices** — Ran 13 local LLMs (3B–8B) through a llama.cpp-based runtime on a CPU-only laptop and a GPU workstation.
@@ -38,6 +43,9 @@ Embedded build errors are hard to diagnose from source code alone — the fix of
 |---|---|---|
 | Laptop (CPU) | **Qwen3 8B + Hybrid** | 8 pp lower SR, but less than half the response time |
 | Workstation (GPU) | **Ministral 3 8B + Hybrid** | Highest SR in both conditions |
+
+![Success rate (%) per model and retrieval setup when the source case is excluded from the KB](/projects/thesis-build-error-rag/sr-heatmap.jpg)
+*Success rate (%) per model and retrieval setup when the source case is excluded — top: CPU laptop, bottom: GPU workstation.*
 
 Both setups run fully offline once the model weights and knowledge base are brought inside the network.
 

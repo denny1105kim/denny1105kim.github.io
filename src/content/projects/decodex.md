@@ -5,6 +5,8 @@ description: 'An AI-agent news service that pre-analyzes investment news, recomm
 period: 'Oct 2025 — Jan 2026'
 kind: 'Team project · 5 people · AI Master Course'
 order: 5
+cover: '/projects/decodex/home.jpg'
+coverAlt: 'DecodeX home page'
 tags: ['Django', 'React', 'PostgreSQL', 'pgvector', 'Kubernetes', 'LLM', 'RAG', 'GA4']
 repo: 'https://github.com/denny1105kim/portfolio-AI-Agent-for-Investment-News-Analysis'
 metrics:
