@@ -1,12 +1,12 @@
 ---
-title: 'K-On Device Computer Vision Optimization'
+title: 'Computer Vision Model Optimization'
 subtitle: 'Edge AI Inference Optimization'
 description: 'Compress and deploy face recognition, object detection and stereo depth models on embedded NPUs and Jetson Orin, and validate their inference results.'
 period: 'Feb 2026 — Present'
 kind: 'Company project · Team of 8'
 order: 3
-cover: '/projects/k-on-device/depth.jpg'
-coverAlt: 'Stereo depth estimation running on device'
+cover: '/projects/cv-model-optimization/face.jpg'
+coverAlt: 'Face detection and recognition running on device'
 tags: ['TensorRT', 'NPU', 'ONNX', 'INT8', 'Pruning', 'Jetson Orin', 'PyTorch']
 metrics:
   - { value: 'FP16 / INT8', label: 'Accuracy & speed per precision' }
@@ -22,10 +22,10 @@ Camera frame → GPU pre-processing (resize · normalize)
   → NPU / TensorRT inference → post-processing · validation
 ```
 
-![Face detection and recognition on device](/projects/k-on-device/face.jpg)
+![Face detection and recognition on device](/projects/cv-model-optimization/face.jpg)
 *Face detection & recognition running on the device.*
 
-![Object detection and stereo depth estimation with BEV](/projects/k-on-device/depth.jpg)
+![Object detection and stereo depth estimation with BEV](/projects/cv-model-optimization/depth.jpg)
 *Object detection + stereo depth estimation (BEV) — Jetson-based application and inference validation.*
 
 ## What I do

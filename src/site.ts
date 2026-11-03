@@ -68,7 +68,7 @@ export const EXPERIENCE = [
     team: 'Solution Development Team',
     title: 'Software Engineer (AI Optimized Engineer)',
     items: [
-      { period: 'Feb 2026 —', text: 'K-On Device: INT8 quantization & pruning of vision models, NPU / TensorRT inference validation' },
+      { period: 'Feb 2026 —', text: 'Computer vision model optimization: INT8 quantization & pruning, NPU / TensorRT inference validation' },
       { period: 'Aug 2025 —', text: 'Built and operate a Kubernetes / KubeRay training & LLM platform on 4 Jetsons and 3 DGX nodes' },
       { period: 'Feb 2025 — Jan 2026', text: 'NPU inference applications on Exynos Auto V920 (ENN SDK)' },
       { period: 'Dec 2023 — Mar 2025', text: 'Yocto BSP, kernel and U-Boot porting; ROS 2 runtime integration' },
