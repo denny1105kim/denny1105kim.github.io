@@ -68,18 +68,33 @@ img { max-width: 100%; display: block; }
 }
 .link:hover { text-decoration-color: currentColor; }
 
-section { margin-top: 64px; }
+/* Section rhythm: one spacing scale for every section on the page */
+:root {
+  --section-gap: 96px;
+  --section-head-gap: 24px;
+  --header-h: 64px;
+}
+@media (max-width: 600px) {
+  :root { --section-gap: 72px; --section-head-gap: 20px; }
+}
+section { margin-top: var(--section-gap); }
+[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
 .section-head {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 16px;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: var(--section-head-gap);
 }
 .section-title {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 600px) {
+  .section-title { font-size: 1.25rem; }
 }
 
 /* Entrance animation */

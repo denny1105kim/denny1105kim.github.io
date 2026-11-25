@@ -7,7 +7,8 @@ const nav = [
   { href: '/blog/', label: 'blog' },
 ];
 ---
-<header class="container header">
+<header class="site-header" id="site-header">
+  <div class="container header">
   <a href="/" class="brand"><span class="full">{SITE.name}</span><span class="short">{SITE.shortName}</span></a>
   <nav>
     {nav.map((n, i) => (
@@ -21,9 +22,15 @@ const nav = [
       <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
   </nav>
+  </div>
 </header>
 
 <script>
+  const header = document.getElementById('site-header');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
     const dark = document.documentElement.classList.toggle('dark');
     try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
@@ -31,12 +38,22 @@ const nav = [
 </script>
 
 <style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .site-header.scrolled { border-bottom-color: var(--line); }
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    height: 64px;
     font-size: 0.9rem;
   }
   .brand { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
