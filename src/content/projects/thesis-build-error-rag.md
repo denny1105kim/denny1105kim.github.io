@@ -5,6 +5,7 @@ description: 'Measured and selected local LLM + RAG configurations that diagnose
 period: 'Mar 2024 — Oct 2026'
 kind: 'M.S. research · Ajou University'
 order: 1
+featured: true
 cover: '/projects/thesis-build-error-rag/pipeline.svg'
 coverAlt: 'Knowledge base construction and air-gapped diagnosis pipeline'
 tags: ['Local LLM', 'RAG', 'FAISS', 'BM25', 'Graph RAG', 'llama.cpp', 'Evaluation']
