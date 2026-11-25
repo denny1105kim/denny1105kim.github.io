@@ -5,33 +5,66 @@ import Timeline from '../components/Timeline.astro';
 import Experience from '../components/Experience.astro';
 import PostList from '../components/PostList.astro';
 import ProjectList from '../components/ProjectList.astro';
-import { SITE, HIGHLIGHTS, STRENGTHS, PUBLICATION, SKILLS, EDUCATION, ACTIVITIES } from '../site';
+import { SITE, SOCIALS, HIGHLIGHTS, STRENGTHS, PUBLICATION, SKILLS, EDUCATION, ACTIVITIES } from '../site';
 import { getPosts, getProjects } from '../utils';
 
 const posts = (await getPosts()).slice(0, 3);
 const projects = await getProjects();
 ---
 <Base>
-  <section class="hero animate" style="margin-top: 24px">
+  <section class="hero animate">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{SITE.focus}</p>
+
     <div class="id">
-      <img src={SITE.avatar} alt={`Portrait of ${SITE.legalName}`} width="96" height="96" class="avatar" />
+      <img src={SITE.avatar} alt={`Portrait of ${SITE.legalName}`} width="112" height="112" class="avatar" />
       <div>
-        <h1>{SITE.name} <span class="en">{SITE.legalName}</span></h1>
-        <p class="role">
-          {SITE.role} <span class="nw"><span class="at">@</span>{' '}<a class="org" href={SITE.companyUrl} target="_blank" rel="noopener noreferrer">{SITE.company}</a></span>
-        </p>
-        <p class="role">
-          {SITE.degree} <span class="nw"><span class="at">@</span>{' '}<a class="org" href={SITE.schoolUrl} target="_blank" rel="noopener noreferrer">{SITE.school}</a></span>
-        </p>
-        <p class="note">{SITE.degreeNote}</p>
-        <p class="where faint">{SITE.location}</p>
+        <h1>{SITE.name}</h1>
+        <p class="aka">{SITE.legalName} · {SITE.nameKo}</p>
       </div>
     </div>
 
-    <p class="lead">
-      Embedded software engineer turned <mark>edge AI</mark> engineer.
-      I bring AI from the cloud down to the device — and keep it running where the internet can't reach.
+    <p class="tagline">
+      From <mark>NPU &amp; Jetson inference</mark> to <mark>GPU training platforms</mark>,
+      I make AI run on real hardware.
     </p>
+
+    <div class="meta">
+      <p class="role">
+        {SITE.role} <span class="nw"><span class="at">@</span>{' '}<a class="org" href={SITE.companyUrl} target="_blank" rel="noopener noreferrer">{SITE.company}</a></span>
+      </p>
+      <p class="role">
+        {SITE.degree} <span class="nw"><span class="at">@</span>{' '}<a class="org" href={SITE.schoolUrl} target="_blank" rel="noopener noreferrer">{SITE.school}</a></span>
+        <span class="note">{SITE.degreeNote}</span>
+      </p>
+      <p class="where">{SITE.location}</p>
+    </div>
+
+    <div class="cta">
+      {SOCIALS.resume && (
+        <a class="btn primary" href={SOCIALS.resume} target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+          Resume
+        </a>
+      )}
+      {SOCIALS.portfolio && (
+        <a class="btn" href={SOCIALS.portfolio} target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+          Portfolio
+        </a>
+      )}
+      {SOCIALS.github && (
+        <a class:list={['btn', { primary: !SOCIALS.resume }]} href={SOCIALS.github} target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub
+        </a>
+      )}
+      <span class="links">
+        {SOCIALS.linkedin && <a class="link muted" href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+        {SOCIALS.email && <a class="link muted" href={`mailto:${SOCIALS.email}`}>Email</a>}
+      </span>
+    </div>
+
     <div class="journey">
       <div class="step">
         <span class="when">Started</span>
@@ -40,8 +73,8 @@ const projects = await getProjects();
       </div>
       <div class="step">
         <span class="when">Now</span>
-        <span class="what">Edge AI</span>
-        <span class="how">On-device inference on NPUs &amp; Jetson</span>
+        <span class="what">Edge AI &amp; GPU platforms</span>
+        <span class="how">On-device inference, KubeRay training cluster</span>
       </div>
       <div class="step">
         <span class="when">Research</span>
@@ -49,8 +82,6 @@ const projects = await getProjects();
         <span class="how">Local LLMs for air-gapped networks</span>
       </div>
     </div>
-
-    <Socials />
   </section>
 
   <section class="stats animate" style="animation-delay: 60ms; margin-top: 48px">
@@ -146,29 +177,72 @@ const projects = await getProjects();
 </Base>
 
 <style>
-  .id { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
-  .avatar {
-    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
-    border: 1px solid var(--line);
-    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line);
+  .hero { position: relative; margin-top: 40px; padding: 8px 0 4px; isolation: isolate; }
+  .glow {
+    position: absolute; z-index: -1; pointer-events: none;
+    inset: -140px -30vw -60px; 
+    background:
+      radial-gradient(42% 52% at 22% 30%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+      radial-gradient(38% 46% at 78% 18%, color-mix(in srgb, #6366f1 12%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 60% 80%, color-mix(in srgb, #0ea5e9 9%, transparent), transparent 70%);
+    filter: blur(8px);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
   }
-  h1 { font-size: 1.65rem; line-height: 1.25; letter-spacing: -0.03em; margin: 0; font-weight: 700; }
-  .en { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: -0.01em; margin-left: 4px; }
-  @media (max-width: 600px) { .en { display: block; margin: 2px 0 0; font-size: 0.85rem; } }
-  .role { margin: 3px 0 0; font-size: 0.9rem; font-weight: 500; line-height: 1.55; }
-  .role + .role { margin-top: 1px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px;
+    font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); padding: 5px 12px; border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, var(--bg));
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .id { display: flex; align-items: center; gap: 24px; margin-bottom: 22px; }
+  .avatar {
+    width: 112px; height: 112px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--accent) 45%, var(--line)), 0 12px 32px -12px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.4rem); line-height: 1.05; letter-spacing: -0.045em; margin: 0; font-weight: 800;
+    background: linear-gradient(120deg, var(--fg) 30%, color-mix(in srgb, var(--accent) 70%, var(--fg)));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .aka { margin: 8px 0 0; font-size: 0.95rem; color: var(--muted); font-weight: 500; letter-spacing: -0.01em; }
+  .tagline {
+    font-size: clamp(1.3rem, 3.6vw, 1.6rem); line-height: 1.45; letter-spacing: -0.03em; font-weight: 700;
+    margin: 0 0 20px; max-width: 34ch;
+  }
+  .meta { margin-bottom: 26px; }
+  .role { margin: 0; font-size: 0.9rem; font-weight: 500; line-height: 1.65; }
   .at { color: var(--faint); font-weight: 400; }
   .nw { white-space: nowrap; }
   .org { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; transition: text-decoration-color 0.15s; }
   .org:hover { text-decoration-color: currentColor; }
-  .note { margin: 0; color: var(--faint); font-size: 0.8rem; }
-  @media (max-width: 600px) {
-    .id { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .note { display: block; color: var(--faint); font-size: 0.8rem; font-weight: 400; line-height: 1.5; }
+  .where { margin: 2px 0 0; font-size: 0.82rem; color: var(--faint); }
+
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 36px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px;
+    border-radius: 10px; font-size: 0.92rem; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--line-strong); background: var(--card); color: var(--fg);
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s, border-color 0.15s;
   }
-  .where { margin: 3px 0 0; font-size: 0.82rem; }
-  .lead { font-size: 1.22rem; line-height: 1.6; letter-spacing: -0.02em; margin: 0 0 22px; font-weight: 600; }
+  .btn:hover { transform: translateY(-1px); border-color: var(--fg); box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.25); }
+  .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .btn.primary:hover { box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .links { display: inline-flex; gap: 14px; margin-left: 6px; font-size: 0.88rem; }
+  @media (max-width: 600px) {
+    .hero { margin-top: 24px; }
+    .id { gap: 16px; }
+    .avatar { width: 84px; height: 84px; }
+    .cta { gap: 8px; }
+    .btn { flex: 1 1 0; justify-content: center; padding: 0 10px; font-size: 0.88rem; gap: 6px; }
+    .links { width: 100%; margin: 4px 0 0; justify-content: center; }
+  }
+
   .journey {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 26px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
     border-left: 2px solid var(--accent);
   }
   .step { display: flex; flex-direction: column; padding: 2px 16px; position: relative; }
