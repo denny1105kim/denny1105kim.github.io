@@ -12,7 +12,7 @@ const posts = (await getPosts()).slice(0, 3);
 const projects = await getProjects();
 ---
 <Base>
-  <section class="hero animate" style="margin-top: 24px">
+  <section class="hero animate" style="margin-top: 40px">
     <div class="id">
       <img src={SITE.avatar} alt={`Portrait of ${SITE.legalName}`} width="96" height="96" class="avatar" />
       <div>
@@ -225,7 +225,7 @@ const projects = await getProjects();
   dd .tags { margin-top: 0; }
   @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 6px; } }
 
-  .contact { margin-top: 88px; padding: 32px 0 0; border-top: 1px solid var(--line); }
+  .contact { margin-top: calc(var(--section-gap) + 16px); padding: 32px 0 0; border-top: 1px solid var(--line); }
   .contact h2 { margin: 0; font-size: 1.4rem; letter-spacing: -0.03em; }
   .contact p { margin: 4px 0 18px; font-size: 0.92rem; }
 </style>
