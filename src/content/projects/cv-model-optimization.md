@@ -1,10 +1,10 @@
 ---
-title: 'Computer Vision Model Optimization'
+title: 'Vision Model Optimization'
 subtitle: 'Edge AI Inference Optimization'
-description: 'Compress and deploy face recognition, object detection and stereo depth models on embedded NPUs and Jetson Orin, and validate their inference results.'
+description: 'Face and hand recognition on Jetson and NPUs, sped up to 30 fps with quantization, pruning and Vulkan.'
 period: 'Feb 2026 — Present'
-kind: 'Company project · Team of 8'
-order: 2
+kind: 'Company · Team of 8'
+order: 1
 cover: '/projects/cv-model-optimization/cover.jpg'
 coverAlt: 'Face detection and recognition running on device'
 tags: ['TensorRT', 'NPU', 'Vulkan', 'C++', 'ONNX', 'INT8', 'Pruning', 'Jetson Orin', 'PyTorch']

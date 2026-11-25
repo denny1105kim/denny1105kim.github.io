@@ -28,46 +28,6 @@ export const SOCIALS = {
   portfolio: '/portfolio.pdf', // e.g. '/portfolio.pdf'
 };
 
-export const HIGHLIGHTS = [
-  {
-    area: 'Embedded Linux',
-    value: 'ARM64 BSP',
-    label: 'Yocto BSP for a robot controller',
-    detail: 'U-Boot · kernel · device tree · drivers · ROS 2',
-  },
-  {
-    area: 'Edge AI',
-    value: 'INT8 + Pruning',
-    label: 'Vision models on NPU & Jetson Orin',
-    detail: 'Face · object · stereo depth · TensorRT',
-  },
-  {
-    area: 'Research',
-    value: '7,150 cases',
-    label: 'On-prem RAG for build-error diagnosis',
-    detail: '13 local LLMs · 11,700 graded answers',
-  },
-];
-
-export const STRENGTHS = [
-  {
-    title: 'Embedded Linux',
-    body: 'Where I started. Yocto-based ARM64 BSPs, U-Boot and Linux kernel porting, device tree and device-driver debugging, board bring-up, and cross-compiling ROS 2 with the Yocto SDK — plus the Gerrit / Jenkins / Artifactory CI around it.',
-  },
-  {
-    title: 'Distributed Computing',
-    body: 'Built and run a heterogeneous GPU cluster — 3 DGX and 4 Jetson nodes — on Kubernetes and KubeRay. Standardized Ray job submission and checkpointing, ran parallel LLM serving and LoRA fine-tuning, and wired up Prometheus, Grafana and MLflow.',
-  },
-  {
-    title: 'Edge AI',
-    body: 'Bring PyTorch / ONNX models onto real devices: conversion for Exynos NPUs and TensorRT, INT8 quantization and structured pruning, and validation of accuracy, latency, FPS and memory for face, object and stereo-depth models.',
-  },
-  {
-    title: 'Research · On-Prem LLM & RAG',
-    body: 'M.S. thesis on diagnosing embedded build errors in air-gapped networks: a 7,150-case knowledge base curated from 1.59M public records, hybrid (Dense + BM25) and graph retrieval, and 13 local LLMs benchmarked on CPU and GPU.',
-  },
-];
-
 export const EXPERIENCE = [
   {
     period: 'Feb 2023 — Present',
@@ -75,11 +35,10 @@ export const EXPERIENCE = [
     team: 'Solution Development Team',
     title: 'Software Engineer (AI Optimized Engineer)',
     items: [
-      { period: 'Feb 2026 —', text: 'Computer vision model optimization: INT8 quantization & pruning, NPU / TensorRT inference validation' },
-      { period: 'Aug 2025 —', text: 'Built and operate a Kubernetes / KubeRay training & LLM platform on 4 Jetsons and 3 DGX nodes' },
-      { period: 'Feb 2025 — Jan 2026', text: 'NPU inference applications on Exynos Auto V920 (ENN SDK)' },
-      { period: 'Dec 2023 — Mar 2025', text: 'Yocto BSP, kernel and U-Boot porting; ROS 2 runtime integration' },
-      { period: 'Feb 2023 —', text: 'CI with Gerrit · Jenkins · Artifactory; Docker-based dev & validation environments' },
+      { period: 'Feb 2026 —', text: 'Vision model optimization and GPU acceleration on Jetson & NPU' },
+      { period: 'Aug 2025 —', text: 'GPU training & LLM platform on 3 DGX + 4 Jetson nodes' },
+      { period: 'Feb 2025 — Jan 2026', text: 'NPU inference apps on Exynos Auto V920' },
+      { period: 'Dec 2023 — Mar 2025', text: 'Yocto BSP and ROS 2 for a robot controller' },
     ],
   },
   {
@@ -88,8 +47,7 @@ export const EXPERIENCE = [
     team: 'Cleaning Mass-Production Engineering Team',
     title: 'Customer Engineer',
     items: [
-      { text: 'Installed and set up semiconductor wet-cleaning equipment; supported mass-production stabilization' },
-      { text: 'Root-caused equipment failures and alarms on customer fab sites and provided technical support' },
+      { text: 'Set-up and mass-production support for semiconductor wet-cleaning equipment' },
     ],
   },
 ];
@@ -103,21 +61,17 @@ export const PUBLICATION = {
   status: 'Under review',
   keywords: ['On-Premises', 'Local LLM', 'RAG', 'Embedded Build Error', 'Error Diagnosis'],
   results: [
-    'With the source case in the KB, Dense / Hybrid retrieval reaches ~90% average success rate',
-    'Without it, success rate improves from 22% (no RAG) to 31–33% (Hybrid)',
-    'Retrieval latency is <0.1% (laptop) to <3% (workstation) of total response time',
-    'Selected Qwen3 8B + Hybrid for laptops and Ministral 3 8B + Hybrid for workstations',
+    '7,150-case knowledge base and 13 local LLMs compared',
+    'Hybrid RAG lifts success rate from 22% to 31–33% on unseen errors',
   ],
-  link: '/projects/thesis-build-error-rag/',
 };
 
 export const SKILLS = [
-  { group: 'Languages', items: ['C', 'C++', 'Python', 'Shell'] },
-  { group: 'LLM / RAG', items: ['FAISS', 'BM25', 'Ollama', 'llama.cpp', 'pgvector', 'LoRA'] },
-  { group: 'ML Infra', items: ['Kubernetes', 'k3s', 'KubeRay', 'Ray Train', 'MLflow', 'Prometheus', 'Grafana', 'GitOps'] },
-  { group: 'Edge AI', items: ['Jetson', 'TensorRT', 'ONNX', 'NPU', 'INT8 Quantization', 'Pruning'] },
-  { group: 'Embedded', items: ['Yocto', 'Linux Kernel', 'U-Boot', 'Device Tree', 'ROS 2'] },
-  { group: 'DevOps', items: ['Docker', 'Jenkins', 'Gerrit', 'Artifactory'] },
+  { group: 'Languages', items: ['C', 'C++', 'Python'] },
+  { group: 'Edge AI', items: ['TensorRT', 'NPU', 'ONNX', 'INT8', 'Vulkan'] },
+  { group: 'ML Infra', items: ['Kubernetes', 'KubeRay', 'MLflow', 'Grafana'] },
+  { group: 'LLM / RAG', items: ['FAISS', 'BM25', 'llama.cpp', 'pgvector'] },
+  { group: 'Embedded', items: ['Yocto', 'Linux Kernel', 'ROS 2'] },
 ];
 
 export const EDUCATION = [

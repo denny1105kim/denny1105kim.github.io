@@ -1,10 +1,10 @@
 ---
 title: 'AISTOCK'
 subtitle: 'Data · ML · LLM Automated Trading Ops'
-description: 'An automated trading and operations system that chains market data collection and validation, ML screening, permission-restricted LLM review, order reconciliation, and ops checks.'
+description: 'Automated trading system, from data collection and ML/LLM decisions to orders and self-healing ops.'
 period: 'Jun 2026 — Present'
-kind: 'Personal project · Design / build / operate'
-order: 5
+kind: 'Personal'
+order: 3
 cover: '/projects/aistock/cover.jpg'
 coverAlt: 'AISTOCK pipeline monitoring dashboard'
 tags: ['Kubernetes', 'TimescaleDB', 'ML', 'LLM', 'Claude Code', 'Codex']
