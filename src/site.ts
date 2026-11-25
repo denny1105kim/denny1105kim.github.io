@@ -35,7 +35,7 @@ export const EXPERIENCE = [
     team: 'Solution Development Team',
     title: 'Software Engineer (AI Optimized Engineer)',
     items: [
-      { period: 'Feb 2026 —', text: 'Vision model optimization and GPU acceleration on Jetson & NPU' },
+      { period: 'Feb 2026 —', text: 'Real-time edge vision on Jetson & NPU, Vulkan shader acceleration to 30 fps' },
       { period: 'Aug 2025 —', text: 'GPU training & LLM platform on 3 DGX + 4 Jetson nodes' },
       { period: 'Feb 2025 — Jan 2026', text: 'NPU inference apps on Exynos Auto V920' },
       { period: 'Dec 2023 — Mar 2025', text: 'Yocto BSP and ROS 2 for a robot controller' },
@@ -70,7 +70,7 @@ export const SKILLS = [
   { group: 'Languages', items: ['C', 'C++', 'Python'] },
   { group: 'Edge AI', items: ['TensorRT', 'NPU', 'ONNX', 'INT8', 'Vulkan'] },
   { group: 'ML Infra', items: ['Kubernetes', 'KubeRay', 'MLflow', 'Grafana'] },
-  { group: 'LLM / RAG', items: ['FAISS', 'BM25', 'llama.cpp', 'pgvector'] },
+  { group: 'LLM / RAG', items: ['Hybrid RAG (FAISS + BM25)', 'Graph RAG', 'llama.cpp · Ollama', 'LoRA fine-tuning', 'pgvector', 'LLM evaluation'] },
   { group: 'Embedded', items: ['Yocto', 'Linux Kernel', 'ROS 2'] },
 ];
 

@@ -1,7 +1,7 @@
 ---
-title: 'Vision Model Optimization'
-subtitle: 'Edge AI Inference Optimization'
-description: 'Face and hand recognition on Jetson and NPUs, sped up to 30 fps with quantization, pruning and Vulkan.'
+title: 'Real-time Edge Vision'
+subtitle: 'Jetson · NPU · Vulkan'
+description: 'Real-time face & hand recognition on Jetson. Moved frame conversion to a Vulkan compute shader, lifting the apps from 17.6 to 30 fps.'
 period: 'Feb 2026 — Present'
 kind: 'Company · Team of 8'
 order: 1
