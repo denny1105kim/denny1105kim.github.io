@@ -6,6 +6,7 @@ export const SITE = {
   shortName: 'Denny Kim',
   title: 'Denny Kim (Jae Hyeon Kim)',
   role: 'Software Engineer (AI Optimized Engineer)',
+  focus: 'AI Platform · On-Device AI',
   company: 'CoAsia',
   companyUrl: 'https://www.coasia.com',
   degree: 'M.S. in Artificial Intelligence',
@@ -23,7 +24,8 @@ export const SOCIALS = {
   email: 'denny1105kim@gmail.com',
   github: 'https://github.com/denny1105kim',
   linkedin: 'https://www.linkedin.com/in/jae-hyeon-kim-60851123b/',
-  resume: '', // e.g. '/resume.pdf' (put the PDF in /public)
+  resume: '/resume.pdf', // e.g. '/resume.pdf' (put the PDF in /public)
+  portfolio: '/portfolio.pdf', // e.g. '/portfolio.pdf'
 };
 
 export const HIGHLIGHTS = [

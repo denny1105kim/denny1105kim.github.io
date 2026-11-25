@@ -42,10 +42,12 @@ const ogImage = new URL('/og.jpg', Astro.site);
     </script>
   </head>
   <body>
+    <div class="page">
     <Header />
     <main class="container">
       <slot />
     </main>
     <Footer />
+    </div>
   </body>
 </html>

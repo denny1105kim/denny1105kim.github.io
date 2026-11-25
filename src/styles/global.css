@@ -50,6 +50,8 @@ body {
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 
+.page { overflow-x: clip; min-height: 100vh; }
+
 .container {
   width: 100%;
   max-width: 720px;
