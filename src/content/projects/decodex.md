@@ -4,8 +4,8 @@ subtitle: 'AI Agent for Investment News Analysis'
 description: 'An AI-agent news service that pre-analyzes investment news, recommends articles matched to each user’s profile, and answers follow-up questions with RAG over pgvector.'
 period: 'Oct 2025 — Jan 2026'
 kind: 'Team project · 5 people · AI Master Course'
-order: 5
-cover: '/projects/decodex/home.jpg'
+order: 6
+cover: '/projects/decodex/cover.jpg'
 coverAlt: 'DecodeX home page'
 tags: ['Django', 'React', 'PostgreSQL', 'pgvector', 'Kubernetes', 'LLM', 'RAG', 'GA4']
 repo: 'https://github.com/denny1105kim/portfolio-AI-Agent-for-Investment-News-Analysis'

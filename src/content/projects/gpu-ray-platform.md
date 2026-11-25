@@ -4,11 +4,12 @@ subtitle: 'Kubernetes · KubeRay Platform'
 description: 'Single-handedly built and operate a shared training and domain-LLM environment that ties 3 DGX and 4 Jetson nodes together with Kubernetes and KubeRay.'
 period: 'Aug 2025 — Present'
 kind: 'Internal project · Solo'
-order: 2
+order: 3
 cover: '/projects/gpu-ray-platform/architecture.svg'
 coverAlt: 'DGX and Jetson nodes connected with Kubernetes and KubeRay'
 tags: ['Kubernetes', 'k3s', 'KubeRay', 'Ray Train', 'MLflow', 'Prometheus', 'Grafana', 'LoRA']
 metrics:
+  - { value: '7 GPUs → 1', label: 'Nodes unified into one cluster' }
   - { value: 'DGX ×3', label: 'Parallel LLM serving · LoRA' }
   - { value: 'Jetson ×4', label: 'Edge training · inference' }
   - { value: '1 module', label: 'Shared job launch convention' }

@@ -1,72 +1,144 @@
 ---
 import type { Project } from '../utils';
 const { projects } = Astro.props as { projects: Project[] };
+// Featured projects come first and span the full row.
+const sorted = [
+  ...projects.filter((p) => p.data.featured),
+  ...projects.filter((p) => !p.data.featured),
+];
+const regularCount = sorted.filter((p) => !p.data.featured).length;
 ---
-{projects.length === 0 ? (
+{sorted.length === 0 ? (
   <p class="muted">Coming soon.</p>
 ) : (
   <ul class="grid">
-    {projects.map((p) => (
-      <li>
-        <a class="pcard" href={`/projects/${p.id}/`}>
-          {p.data.cover && (
-            <div class="cover"><img src={p.data.cover} alt={p.data.coverAlt} decoding="async" /></div>
-          )}
-          <div class="top">
-            <span class="kind">{p.data.subtitle}</span>
-            <span class="arrow" aria-hidden="true">→</span>
-          </div>
-          <h3>{p.data.title}</h3>
-          <p class="desc">{p.data.description}</p>
-          {p.data.metrics.length > 0 && (
-            <div class="metrics">
-              {p.data.metrics.slice(0, 2).map((m) => (
-                <div><strong>{m.value}</strong><span>{m.label}</span></div>
-              ))}
+    {sorted.map((p, i) => {
+      const featured = p.data.featured;
+      // An odd card left alone on the last row spans the row in a side-by-side layout.
+      const wide = !featured && regularCount % 2 === 1 && i === sorted.length - 1;
+      const metrics = p.data.metrics.slice(0, featured ? 4 : 2);
+      return (
+        <li class:list={[{ featured, wide }]}>
+          <a class="pcard" href={`/projects/${p.id}/`}>
+            {p.data.cover && (
+              <div class:list={['cover', { diagram: p.data.cover.endsWith('.svg') }]}>
+                <img src={p.data.cover} alt={p.data.coverAlt} loading={i < 3 ? 'eager' : 'lazy'} decoding="async" />
+              </div>
+            )}
+            <div class="body">
+              <div class="top">
+                <span class="kind">
+                  {featured && <span class="flag">Featured</span>}
+                  {p.data.subtitle}
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+              <h3>{p.data.title}</h3>
+              <p class="desc">{p.data.description}</p>
+              {metrics.length > 0 && (
+                <div class="metrics">
+                  {metrics.map((m) => (
+                    <div><strong>{m.value}</strong><span>{m.label}</span></div>
+                  ))}
+                </div>
+              )}
+              <div class="foot">
+                <span class="faint">{p.data.period}</span>
+                <span class="faint">{p.data.kind}</span>
+              </div>
             </div>
-          )}
-          <div class="foot">
-            <span class="faint">{p.data.period}</span>
-            <span class="faint">{p.data.kind}</span>
-          </div>
-        </a>
-      </li>
-    ))}
+          </a>
+        </li>
+      );
+    })}
   </ul>
 )}
 <style>
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+  }
+  .grid > li { display: flex; min-width: 0; }
+  .featured, .wide { grid-column: 1 / -1; }
+
   .pcard {
-    display: block;
-    padding: 20px 20px 16px;
+    display: flex; flex-direction: column; width: 100%;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--card);
     text-decoration: none;
-    transition: background-color 0.15s, border-color 0.15s, transform 0.2s;
+    overflow: hidden;
+    transition: background-color 0.15s, border-color 0.15s, box-shadow 0.2s, transform 0.2s;
   }
-  .pcard:hover { background: var(--card-hover); border-color: var(--line-strong); }
+  .pcard:hover {
+    background: var(--card-hover); border-color: var(--line-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.35);
+  }
+
+  /* Every cover uses the same 16:9 frame. Photos fill it; diagrams fit inside. */
   .cover {
-    margin: -20px -20px 16px;
-    aspect-ratio: 16 / 7;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-bottom: 1px solid var(--line);
     background: #f6f7f6;
-    border-radius: var(--radius) var(--radius) 0 0;
+    flex-shrink: 0;
   }
-  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+  .cover img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cover.diagram img { object-fit: contain; }
   .pcard:hover .cover img { transform: scale(1.03); }
-  .cover img[src$='.svg'] { object-fit: contain; padding: 6px 0; }
-  .pcard:hover .arrow { transform: translateX(3px); color: var(--fg); }
-  .top { display: flex; justify-content: space-between; align-items: center; }
-  .kind { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .pcard:hover .cover.diagram img { transform: scale(1.015); }
+
+  .body { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 14px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .kind { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 600; line-height: 1.4; }
+  .flag {
+    display: inline-block; margin-right: 8px; padding: 2px 7px; border-radius: 999px;
+    background: var(--accent); color: var(--bg); letter-spacing: 0.06em;
+  }
   .arrow { color: var(--faint); transition: transform 0.15s, color 0.15s; }
-  h3 { margin: 6px 0 4px; font-size: 1.05rem; letter-spacing: -0.015em; line-height: 1.45; }
-  .desc { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
-  .metrics { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; }
-  .metrics div { display: flex; flex-direction: column; line-height: 1.35; }
-  .metrics strong { font-size: 0.95rem; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-  .metrics span { font-size: 0.75rem; color: var(--faint); }
-  .foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 0.76rem; }
-  @media (max-width: 520px) { .foot { flex-direction: column; gap: 0; } }
+  .pcard:hover .arrow { transform: translateX(3px); color: var(--fg); }
+  h3 { margin: 6px 0 4px; font-size: 1rem; letter-spacing: -0.015em; line-height: 1.45; }
+  .desc { margin: 0 0 14px; color: var(--muted); font-size: 0.85rem; line-height: 1.65; }
+  .metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; margin: 0 0 14px; }
+  .metrics div { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+  .metrics strong { font-size: 0.92rem; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .metrics span { font-size: 0.72rem; color: var(--faint); }
+  .foot {
+    display: flex; flex-direction: column; gap: 0; margin-top: auto; padding-top: 12px;
+    border-top: 1px dashed var(--line); font-size: 0.74rem; line-height: 1.6;
+  }
+
+  /* Featured: larger cover, bigger type, up to 4 metrics in one row. */
+  .featured .cover { aspect-ratio: 2 / 1; }
+  .featured .body { padding: 20px 22px 16px; }
+  .featured h3 { font-size: 1.2rem; margin-top: 8px; }
+  .featured .desc { font-size: 0.92rem; }
+  .featured .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 4px 0 18px; }
+  .featured .metrics strong { font-size: 1.05rem; }
+  .featured .foot { flex-direction: row; justify-content: space-between; gap: 12px; }
+
+  /* Wide (orphan) card: cover on the left, text on the right. */
+  @media (min-width: 640px) {
+    .wide .pcard { flex-direction: row; }
+    .wide .cover {
+      width: 50%; align-self: center; margin: 16px 0 16px 16px;
+      border: 1px solid var(--line); border-radius: calc(var(--radius) - 4px);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .grid { grid-template-columns: 1fr; }
+    .featured .cover { aspect-ratio: 16 / 9; }
+    .featured .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .featured .foot { flex-direction: column; gap: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pcard, .cover img { transition: none; }
+    .pcard:hover { transform: none; }
+    .pcard:hover .cover img { transform: none; }
+  }
 </style>
