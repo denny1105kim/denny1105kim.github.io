@@ -5,7 +5,7 @@ import Timeline from '../components/Timeline.astro';
 import Experience from '../components/Experience.astro';
 import PostList from '../components/PostList.astro';
 import ProjectList from '../components/ProjectList.astro';
-import { SITE, SOCIALS, HIGHLIGHTS, STRENGTHS, PUBLICATION, SKILLS, EDUCATION, ACTIVITIES } from '../site';
+import { SITE, SOCIALS, PUBLICATION, SKILLS, EDUCATION } from '../site';
 import { getPosts, getProjects } from '../utils';
 
 const posts = (await getPosts()).slice(0, 3);
@@ -64,53 +64,11 @@ const projects = await getProjects();
         {SOCIALS.email && <a class="link muted" href={`mailto:${SOCIALS.email}`}>Email</a>}
       </span>
     </div>
-
-    <div class="journey">
-      <div class="step">
-        <span class="when">Started</span>
-        <span class="what">Embedded Linux</span>
-        <span class="how">Board bring-up, BSP porting, device drivers</span>
-      </div>
-      <div class="step">
-        <span class="when">Now</span>
-        <span class="what">Edge AI &amp; GPU platforms</span>
-        <span class="how">On-device inference, KubeRay training cluster</span>
-      </div>
-      <div class="step">
-        <span class="when">Research</span>
-        <span class="what">On-prem LLM &amp; RAG</span>
-        <span class="how">Local LLMs for air-gapped networks</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="stats animate" style="animation-delay: 60ms; margin-top: 48px">
-    {HIGHLIGHTS.map((h) => (
-      <div class="stat">
-        <div class="area">{h.area}</div>
-        <div class="v">{h.value}</div>
-        <div class="l">{h.label}</div>
-        <div class="d faint">{h.detail}</div>
-      </div>
-    ))}
-  </section>
-
-  <section class="animate" style="animation-delay: 120ms">
-    <div class="section-head"><h2 class="section-title">What I do</h2></div>
-    <div class="strengths">
-      {STRENGTHS.map((s, i) => (
-        <div class="strength">
-          <span class="num">0{i + 1}</span>
-          <h3>{s.title}</h3>
-          <p>{s.body}</p>
-        </div>
-      ))}
-    </div>
   </section>
 
   <section class="animate" style="animation-delay: 160ms">
     <div class="section-head">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Projects</h2>
       <a href="/projects/" class="link muted small">All projects</a>
     </div>
     <ProjectList projects={projects} />
@@ -118,18 +76,17 @@ const projects = await getProjects();
 
   <section id="research" class="animate" style="animation-delay: 200ms">
     <div class="section-head"><h2 class="section-title">Research</h2></div>
-    <a class="paper" href={PUBLICATION.link}>
+    <div class="paper">
       <div class="paper-top">
         <span class="badge">M.S. Thesis</span>
         <span class="faint small">{PUBLICATION.year} · {PUBLICATION.status}</span>
       </div>
       <h3>{PUBLICATION.title}</h3>
-      <p class="venue faint">{PUBLICATION.venue} · {PUBLICATION.advisor}</p>
+      <p class="venue faint">{PUBLICATION.venue}</p>
       <ul class="results">
         {PUBLICATION.results.map((r) => <li>{r}</li>)}
       </ul>
-      <span class="more">Read more →</span>
-    </a>
+    </div>
   </section>
 
   <section class="animate" style="animation-delay: 240ms">
@@ -152,11 +109,6 @@ const projects = await getProjects();
   <section class="animate" style="animation-delay: 280ms">
     <div class="section-head"><h2 class="section-title">Education</h2></div>
     <Timeline items={EDUCATION} />
-  </section>
-
-  <section class="animate" style="animation-delay: 300ms">
-    <div class="section-head"><h2 class="section-title">Training & Activities</h2></div>
-    <Timeline items={ACTIVITIES.map((a) => ({ period: a.period, title: a.text, org: '' }))} />
   </section>
 
   {posts.length > 0 && (
@@ -241,56 +193,20 @@ const projects = await getProjects();
     .links { width: 100%; margin: 4px 0 0; justify-content: center; }
   }
 
-  .journey {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-    border-left: 2px solid var(--accent);
-  }
-  .step { display: flex; flex-direction: column; padding: 2px 16px; position: relative; }
-  .step + .step { border-left: 1px solid var(--line); }
-  .when { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-  .what { font-size: 0.98rem; font-weight: 650; letter-spacing: -0.01em; margin-top: 2px; }
-  .how { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-top: 2px; }
-  @media (max-width: 600px) {
-    .journey { grid-template-columns: 1fr; gap: 12px; }
-    .step + .step { border-left: 0; }
-  }
   mark { background: none; color: inherit; background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 22%, transparent) 62%); padding: 0 1px; }
-  .sub { margin: 0 0 24px; font-size: 0.93rem; }
   .small { font-size: 0.82rem; }
-
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
-  .stat { padding: 18px 18px 16px; }
-  .stat + .stat { border-left: 1px solid var(--line); }
-  .area { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
-  .v { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-  .l { font-size: 0.84rem; margin-top: 2px; }
-  .d { font-size: 0.75rem; }
-  @media (max-width: 600px) {
-    .stats { grid-template-columns: 1fr; }
-    .stat + .stat { border-left: 0; border-top: 1px solid var(--line); }
-  }
-
-  .strengths { display: grid; gap: 20px; }
-  .strength { display: grid; grid-template-columns: 36px 1fr; column-gap: 8px; }
-  .num { grid-row: span 2; color: var(--accent); font-size: 0.8rem; font-weight: 600; font-variant-numeric: tabular-nums; padding-top: 3px; }
-  .strength h3 { margin: 0; font-size: 0.98rem; letter-spacing: -0.01em; }
-  .strength p { margin: 2px 0 0; color: var(--muted); font-size: 0.89rem; line-height: 1.7; }
 
   .paper {
     display: block; text-decoration: none; padding: 22px; border-radius: var(--radius);
     border: 1px solid var(--line); background: var(--card);
     transition: background-color 0.15s, border-color 0.15s;
   }
-  .paper:hover { background: var(--card-hover); border-color: var(--line-strong); }
-  .paper:hover .more { color: var(--fg); }
   .paper-top { display: flex; justify-content: space-between; align-items: center; }
   .badge { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
   .paper h3 { margin: 8px 0 4px; font-size: 1.05rem; line-height: 1.5; letter-spacing: -0.015em; }
-  .en-title { margin: 0; font-size: 0.86rem; color: var(--muted); font-style: italic; line-height: 1.55; }
   .venue { margin: 8px 0 0; font-size: 0.8rem; }
   .results { margin: 14px 0 0; padding-left: 18px; font-size: 0.87rem; line-height: 1.7; }
   .results li::marker { color: var(--accent); }
-  .more { display: inline-block; margin-top: 12px; font-size: 0.82rem; color: var(--muted); transition: color 0.15s; }
 
   .skills { margin: 0; display: grid; gap: 12px; }
   .row { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: start; }

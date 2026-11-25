@@ -23,7 +23,6 @@ const projects = defineCollection({
     period: z.string(),
     kind: z.string(), // e.g. company / personal / team / research
     order: z.number().default(99), // lower comes first
-    featured: z.boolean().default(false), // shown as the large card
     tags: z.array(z.string()).default([]),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     cover: z.string().optional(), // image in /public, shown on cards

@@ -1,10 +1,10 @@
 ---
-title: 'Heterogeneous GPU Training & LLM Platform'
+title: 'Heterogeneous GPU Platform'
 subtitle: 'Kubernetes · KubeRay Platform'
-description: 'Single-handedly built and operate a shared training and domain-LLM environment that ties 3 DGX and 4 Jetson nodes together with Kubernetes and KubeRay.'
+description: 'One Kubernetes + KubeRay cluster for training and LLMs across 3 DGX and 4 Jetson nodes.'
 period: 'Aug 2025 — Present'
-kind: 'Internal project · Solo'
-order: 3
+kind: 'Company · Solo'
+order: 2
 cover: '/projects/gpu-ray-platform/architecture.svg'
 coverAlt: 'DGX and Jetson nodes connected with Kubernetes and KubeRay'
 tags: ['Kubernetes', 'k3s', 'KubeRay', 'Ray Train', 'MLflow', 'Prometheus', 'Grafana', 'LoRA']
